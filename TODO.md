@@ -169,6 +169,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Done when:** entries are plain objects (`JSON.stringify` works); `clear` empties output but ↑ still recalls history.
 
 ### 5.2 Command registry + context ✅ DONE
+
 - **Change during 5.4:** commands stay plain data (`run` side effects + optional `text()`); rich output
   components are mapped by name in `outputs/index.ts` (`OUTPUTS`) and resolved in `output-resolver.ts`
   — avoids import cycles between store ↔ registry ↔ outputs.
@@ -215,7 +216,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   Tab-complete args for `themes set`, `socials go`, `projects go`.
 - **Done when:** `themes set espresso` persists; `gui` switches mode.
 
-### 5.7 Errors + mobile
+### 5.7 Errors + mobile ✅ DONE
 
 - **Do:** unknown command → `command not found: x — type 'help'`; invalid args → usage line;
   prompt wraps on narrow screens; font-size scales.

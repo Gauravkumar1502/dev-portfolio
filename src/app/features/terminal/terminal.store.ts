@@ -49,6 +49,9 @@ export class TerminalStore {
     } else if (command?.run) {
       const message = command.run(this.context(entry.args));
       if (message) entry.error = message;
+    } else if (command && !command.usage && entry.args.length > 0) {
+      // Commands without a `usage` take no arguments.
+      entry.error = `usage: ${command.name}`;
     }
 
     // `clear` empties the screen and is not echoed itself.

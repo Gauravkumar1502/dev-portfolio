@@ -9,8 +9,9 @@
 
 .terminal {
   padding: var(--space-4);
+  overflow-x: hidden;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.6;
 
   @include nb.tablet-up {

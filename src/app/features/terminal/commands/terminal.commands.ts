@@ -55,6 +55,7 @@ export const TERMINAL_COMMANDS: Command[] = [
   {
     name: 'sudo',
     description: '',
+    usage: 'usage: sudo <command>',
     text: () => [
       'visitor is not in the sudoers file. This incident will be reported. 😄',
       'Nice try though!',
