@@ -1,11 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Service, signal } from '@angular/core';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../../core/services/storage.service';
 import { ProfileStore } from '../../core/state/profile.store';
 import { ThemeStore } from '../../core/state/theme.store';
 import { type CommandContext, type TermEntry } from '../../models/terminal.model';
 import { parseCommand } from './command-parser';
 import { findCommand, VISIBLE_COMMANDS } from './command-registry';
+
+const HISTORY_KEY = 'portfolio:terminal-history';
+const MAX_HISTORY = 100;
 
 /**
  * Session state for one terminal screen. Provided by the `Terminal` component,
@@ -17,6 +21,7 @@ export class TerminalStore {
   private readonly theme = inject(ThemeStore);
   private readonly profile = inject(ProfileStore).data;
   private readonly document = inject(DOCUMENT);
+  private readonly storage = inject(StorageService);
 
   private nextId = 0;
 
@@ -26,8 +31,11 @@ export class TerminalStore {
   /** Executed lines, oldest first. Plain data only. */
   /** Starts with the welcome banner (empty `input` = not echoed as a typed command). */
   readonly entries = signal<TermEntry[]>([{ ...this.createEntry('welcome'), input: '' }]);
-  /** Submitted inputs, newest first. Kept separately so `clear` doesn't wipe ↑ recall. */
-  readonly history = signal<string[]>([]);
+  /**
+   * Submitted inputs, newest first, persisted in localStorage (last 100).
+   * Kept separately from `entries` so `clear` doesn't wipe ↑ recall; `history -c` does.
+   */
+  readonly history = signal<string[]>(this.loadHistory());
   /** Current text in the prompt. */
   readonly input = signal('');
   /** Completion candidates shown when Tab finds several matches. */
@@ -35,12 +43,31 @@ export class TerminalStore {
   /** Position while browsing history with ↑/↓ (-1 = editing a fresh line). */
   private readonly pointer = signal(-1);
 
+  /**
+   * Faded inline suggestion (rest of the line) shown after the cursor:
+   * most recent matching history line first, otherwise a single unambiguous completion.
+   */
+  readonly suggestion = computed(() => {
+    const value = this.input();
+    if (!value.trim()) return '';
+    const fromHistory = this.history().find((h) => h.length > value.length && h.startsWith(value));
+    if (fromHistory) return fromHistory.slice(value.length);
+    const { partial, matches } = this.completionsFor(value);
+    return matches.length === 1 ? (matches[0] ?? '').slice(partial.length) : '';
+  });
+
+  constructor() {
+    effect(() => this.storage.set(HISTORY_KEY, this.history()));
+  }
+
   submit(raw = this.input()): void {
     const line = raw.trim();
     this.input.set('');
     this.hints.set([]);
     this.pointer.set(-1);
-    if (line) this.history.update((h) => [line, ...h]);
+    if (line && line !== this.history()[0]) {
+      this.history.update((h) => [line, ...h].slice(0, MAX_HISTORY));
+    }
 
     const entry = this.createEntry(line);
     const command = findCommand(entry.name);
@@ -97,6 +124,26 @@ export class TerminalStore {
     const value = this.input();
     if (!value.trim()) return;
 
+    const { partial, matches } = this.completionsFor(value);
+    if (matches.length === 0) return;
+    const completion = matches.length === 1 ? `${matches[0]} ` : commonPrefix(matches);
+    this.hints.set(matches.length === 1 ? [] : matches);
+    if (completion.length > partial.length) {
+      this.input.set(value.slice(0, value.length - partial.length) + completion);
+    }
+  }
+
+  /** → / End / tap: take the inline suggestion. */
+  acceptSuggestion(): boolean {
+    const rest = this.suggestion();
+    if (!rest) return false;
+    this.input.update((value) => value + rest);
+    this.hints.set([]);
+    return true;
+  }
+
+  /** Candidates for the word being typed (command name or argument). */
+  private completionsFor(value: string): { partial: string; matches: string[] } {
     const endsWithSpace = /\s$/.test(value);
     const { name, args } = parseCommand(value);
     const typingName = args.length === 0 && !endsWithSpace;
@@ -105,14 +152,14 @@ export class TerminalStore {
     const candidates = typingName
       ? this.commands.map((c) => c.name)
       : (findCommand(name)?.complete?.(endsWithSpace ? [...args, ''] : args, this.profile()) ?? []);
-    const matches = candidates.filter((c) => c.startsWith(partial.toLowerCase()));
+    return { partial, matches: candidates.filter((c) => c.startsWith(partial.toLowerCase())) };
+  }
 
-    if (matches.length === 0) return;
-    const completion = matches.length === 1 ? `${matches[0]} ` : commonPrefix(matches);
-    this.hints.set(matches.length === 1 ? [] : matches);
-    if (completion.length > partial.length) {
-      this.input.set(value.slice(0, value.length - partial.length) + completion);
-    }
+  private loadHistory(): string[] {
+    const stored = this.storage.get<unknown>(HISTORY_KEY);
+    return Array.isArray(stored)
+      ? stored.filter((line): line is string => typeof line === 'string').slice(0, MAX_HISTORY)
+      : [];
   }
 
   private createEntry(raw: string): TermEntry {
@@ -128,6 +175,7 @@ export class TerminalStore {
       navigateToGui: () => void this.router.navigate(['/']),
       setTheme: (name) => this.theme.setTerminalTheme(name),
       clear: () => this.clear(),
+      clearHistory: () => this.history.set([]),
       openUrl: (url) => {
         if (url.startsWith('mailto:')) win?.location.assign(url);
         else win?.open(url, '_blank', 'noopener');

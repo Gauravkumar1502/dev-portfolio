@@ -29,6 +29,7 @@ export class HelpOutput {
   protected readonly commands = inject(TerminalStore).commands;
   protected readonly keys = [
     { combo: 'Tab or Ctrl + i', action: 'autocomplete' },
+    { combo: 'Right / End', action: 'accept the faded suggestion' },
     { combo: 'Up / Down', action: 'browse command history' },
     { combo: 'Ctrl + l', action: 'clear the terminal' },
     { combo: 'Ctrl + c', action: 'cancel the current line' },

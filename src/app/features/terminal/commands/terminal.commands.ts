@@ -20,7 +20,20 @@ export const TERMINAL_COMMANDS: Command[] = [
       return undefined;
     },
   },
-  { name: 'history', description: 'view command history' },
+  {
+    name: 'history',
+    description: 'view command history (-c to clear it)',
+    usage: 'usage: history [-c]',
+    complete: (args) => (args.length <= 1 ? ['-c'] : []),
+    run: ({ args, clearHistory }) => {
+      if (args.length === 0) return undefined;
+      if (args.length === 1 && args[0] === '-c') {
+        clearHistory();
+        return undefined;
+      }
+      return 'usage: history [-c]';
+    },
+  },
   {
     name: 'echo',
     description: 'print out anything',

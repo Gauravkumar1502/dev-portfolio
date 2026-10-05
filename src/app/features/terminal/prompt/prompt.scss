@@ -22,9 +22,20 @@
   }
 }
 
-.prompt__input {
+.prompt__field {
+  display: grid;
   flex: 1;
   min-width: 8rem;
+
+  > * {
+    grid-area: 1 / 1;
+  }
+}
+
+.prompt__input {
+  position: relative;
+  width: 100%;
+  min-width: 0;
   padding: 0;
   font: inherit;
   color: inherit;
@@ -32,6 +43,25 @@
   outline: none;
   background: transparent;
   border: none;
+}
+
+// Sits on top of the input but lets clicks through, except on the suggested part.
+.prompt__ghost {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  white-space: pre;
+  pointer-events: none;
+}
+
+.prompt__ghost-typed {
+  visibility: hidden;
+}
+
+.prompt__ghost-rest {
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0.45;
 }
 
 .prompt__hints {

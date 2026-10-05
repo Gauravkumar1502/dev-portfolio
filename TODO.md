@@ -222,6 +222,24 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   prompt wraps on narrow screens; font-size scales.
 - **Done when:** usable at 375px.
 
+### 5.8 Persistent history ✅ DONE
+
+- **Files:** `terminal.store.ts`, `commands/terminal.commands.ts`, `outputs/history.ts`
+- `history` saved to localStorage (`portfolio:terminal-history`, last 100, no consecutive duplicates),
+  validated on load; `history -c` clears it. `clear` / Ctrl+L still only clear the screen.
+
+### 5.9 Inline (ghost) suggestion ✅ DONE
+
+- **Files:** `terminal.store.ts` (`suggestion`, `acceptSuggestion`), `prompt/prompt.*`, `outputs/help.ts`
+- Faded rest-of-line after the cursor: newest matching history line, else a single unambiguous completion.
+  Accept with → / End (cursor at end) or tap on mobile; Esc dismisses; hidden when the input overflows.
+
+### 5.10 Restore last terminal screen (optional, pending)
+
+- **Do:** persist `entries` (plain data, last ~50) and rebuild them on load — outputs re-render from data,
+  `run` side effects are NOT re-executed. `clear` / Ctrl+L also wipe the saved screen.
+- **Done when:** reload shows the previous session; `projects go 1` doesn't reopen tabs.
+
 ---
 
 ## 6. Polish
@@ -259,6 +277,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Done when:** workflow green on push to `main`.
 
 ### 7.2 Repo
+
 - [ ] Create `dev-portfolio` repo on GitHub (public, no README) and `git remote add origin … && git push -u origin main`
 - [ ] Settings → Pages → Build and deployment → Source: **GitHub Actions** (one-time; nothing else needed —
       the workflow uses the built-in `GITHUB_TOKEN`, no personal token/secret)

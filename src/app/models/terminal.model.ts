@@ -27,6 +27,7 @@ export interface CommandContext {
   navigateToGui(): void;
   setTheme(name: string): boolean;
   clear(): void;
+  clearHistory(): void;
   openUrl(url: string): void;
   download(url: string, fileName: string): void;
 }
