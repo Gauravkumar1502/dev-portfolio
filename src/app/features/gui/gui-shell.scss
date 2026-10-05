@@ -50,3 +50,8 @@
 .gui__placeholder {
   color: var(--color-muted);
 }
+
+// Reserves space for deferred sections to limit layout shift.
+.gui__defer-placeholder {
+  min-height: 22rem;
+}

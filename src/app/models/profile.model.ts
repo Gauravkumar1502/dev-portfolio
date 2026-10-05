@@ -55,6 +55,8 @@ export interface Profile {
   location: string;
   about: string[];
   aboutTech: string[];
+  /** Optional square photo in `public/images/` (e.g. `images/profile.webp`), shown in About. */
+  photo?: string;
   email: string;
   resumeUrl: string;
   socials: Social[];

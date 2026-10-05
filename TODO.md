@@ -110,21 +110,21 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   (company name highlighted) → Resume nbButton (opens PDF new tab) + "Say hello" outline button.
 - **Done when:** visually matches screenshot, responsive type with `clamp()`.
 
-### 4.6 About section
+### 4.6 About section ✅ DONE
 
 - **Files:** `sections/about/about.ts/.scss`
 - **Do:** `section-title` 01; paragraphs from `about`; tech list in 2 columns with `▹` markers;
   optional photo in nb-card frame (NgOptimizedImage) if an image is provided.
 - **Done when:** reads from `ProfileStore`, stacks on mobile.
 
-### 4.7 Experience section
+### 4.7 Experience section ✅ DONE (`@defer on viewport`)
 
 - **Files:** `sections/experience/experience.ts/.scss`
 - **Do:** `@angular/aria` tabs: company tab list (vertical desktop, horizontal scroll mobile) +
   panel nb-card with role, `@ company`, dates, location, bullet points. Selected index as `signal`.
 - **Done when:** arrow-key navigation between tabs works, ARIA roles correct.
 
-### 4.8 Projects section
+### 4.8 Projects section ✅ DONE
 
 - **Files:** `sections/projects/projects.ts/.scss`
 - **Do:** responsive grid of interactive nb-cards: name, description, `nb-tag` stack, repo/live icon links.

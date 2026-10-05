@@ -1,0 +1,32 @@
+<div class="experience" ngTabs appReveal>
+  <ul
+    class="experience__tabs"
+    ngTabList
+    aria-label="Companies"
+    [orientation]="orientation()"
+    selectionMode="follow"
+    [(selectedTab)]="selected"
+  >
+    @for (job of jobs(); track job.value) {
+      <li class="experience__tab" ngTab [value]="job.value">{{ job.company }}</li>
+    }
+  </ul>
+
+  @for (job of jobs(); track job.value) {
+    <div class="experience__panel" ngTabPanel [value]="job.value">
+      <ng-template ngTabContent>
+        <nb-card>
+          <h3 class="experience__role">
+            {{ job.role }} <span class="experience__company">@ {{ job.company }}</span>
+          </h3>
+          <p class="experience__meta">{{ job.start }} – {{ job.end }} · {{ job.location }}</p>
+          <ul class="experience__points">
+            @for (point of job.points; track $index) {
+              <li>{{ point }}</li>
+            }
+          </ul>
+        </nb-card>
+      </ng-template>
+    </div>
+  }
+</div>

@@ -1,0 +1,103 @@
+@use 'mixins' as nb;
+
+.experience {
+  display: grid;
+  gap: var(--space-6);
+
+  @include nb.desktop-up {
+    grid-template-columns: 14rem 1fr;
+    align-items: start;
+  }
+}
+
+.experience__tabs {
+  display: flex;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+  border-block-end: var(--nb-border-width) solid var(--color-muted);
+
+  @include nb.desktop-up {
+    flex-direction: column;
+    overflow-x: visible;
+    border-block-end: none;
+    border-inline-start: var(--nb-border-width) solid var(--color-muted);
+  }
+}
+
+.experience__tab {
+  @include nb.focus-ring;
+
+  flex-shrink: 0;
+  padding: var(--space-3) var(--space-4);
+  margin-block-end: calc(-1 * var(--nb-border-width));
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  border-block-end: var(--nb-border-width) solid transparent;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  &[aria-selected='true'] {
+    color: var(--color-primary);
+    background: var(--nb-surface);
+    border-color: var(--color-primary);
+  }
+
+  @include nb.desktop-up {
+    margin-block-end: 0;
+    margin-inline-start: calc(-1 * var(--nb-border-width));
+    border-block-end: none;
+    border-inline-start: var(--nb-border-width) solid transparent;
+  }
+}
+
+.experience__panel {
+  @include nb.focus-ring;
+
+  // @angular/aria marks inactive panels `inert` but leaves them visible.
+  &[inert] {
+    display: none;
+  }
+}
+
+.experience__role {
+  font-size: 1.2rem;
+  color: var(--color-text);
+}
+
+.experience__company {
+  color: var(--color-primary);
+}
+
+.experience__meta {
+  margin-block: var(--space-1) var(--space-4);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.experience__points {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0;
+  color: var(--color-muted);
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-inline-start: var(--space-6);
+  }
+
+  li::before {
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    content: '▹';
+  }
+}

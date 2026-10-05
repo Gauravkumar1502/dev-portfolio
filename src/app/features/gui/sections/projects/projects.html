@@ -1,0 +1,48 @@
+<ul class="projects">
+  @for (project of projects(); track project.name; let i = $index) {
+    <li appReveal [revealDelay]="(i % 3) * 100">
+      <nb-card interactive class="project" [class.project--featured]="project.featured">
+        <div class="project__top">
+          <span class="project__folder" aria-hidden="true">{{
+            project.featured ? '★' : '{ }'
+          }}</span>
+          <div class="project__links">
+            @if (project.repo; as repo) {
+              <a
+                class="project__link"
+                [href]="repo"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="project.name + ' source code on GitHub (opens in a new tab)'"
+              >
+                <app-icon name="github" [size]="20" />
+              </a>
+            }
+            @if (project.live; as live) {
+              <a
+                class="project__link"
+                [href]="live"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="project.name + ' live demo (opens in a new tab)'"
+              >
+                <app-icon name="external" [size]="18" />
+              </a>
+            }
+          </div>
+        </div>
+
+        <h3 class="project__name">{{ project.name }}</h3>
+        <p class="project__description">{{ project.description }}</p>
+
+        <ul class="project__stack" aria-label="Tech stack">
+          @for (tech of project.stack; track tech) {
+            <li>
+              <nb-tag>{{ tech }}</nb-tag>
+            </li>
+          }
+        </ul>
+      </nb-card>
+    </li>
+  }
+</ul>

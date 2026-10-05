@@ -22,7 +22,25 @@
           [index]="i + 1"
           [label]="section.label"
         />
-        <p class="gui__placeholder">Coming in step 4.</p>
+        @switch (section.fragment) {
+          @case ('about') {
+            <app-about />
+          }
+          @case ('experience') {
+            <!-- Tabs code is lazy-loaded once the section approaches the viewport. -->
+            @defer (on viewport; prefetch on idle) {
+              <app-experience />
+            } @placeholder {
+              <div class="gui__defer-placeholder"></div>
+            }
+          }
+          @case ('projects') {
+            <app-projects />
+          }
+          @default {
+            <p class="gui__placeholder">Coming in step 4.</p>
+          }
+        }
       </section>
     }
   </main>
