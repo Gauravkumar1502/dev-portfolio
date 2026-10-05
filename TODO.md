@@ -30,7 +30,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Done when:** build passes, theme still applies on load.
 - **Note:** component-provided stores (e.g. `TerminalStore`) use `@Service({ autoProvided: false })` + `providers: [...]`.
 
-### 2.2 Complete profile content ✅ DONE (except LeetCode URL — pending from Gaurav)
+### 2.2 Complete profile content ✅ DONE
 
 - **Files:** `data/profile.data.ts`, `models/profile.model.ts`
 - **Do:** add `about: string[]` paragraphs (rewrite old about-me, now RedBlink), `aboutTech: string[]`,

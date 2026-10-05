@@ -36,6 +36,12 @@ export const PROFILE: Profile = {
       url: 'https://www.linkedin.com/in/gauravkumar15',
       icon: 'linkedin',
     },
+    {
+      id: 'leetcode',
+      label: 'LeetCode',
+      url: 'https://leetcode.com/GauravKumar15/',
+      icon: 'leetcode',
+    },
     { id: 'x', label: 'X / Twitter', url: 'https://x.com/Gauravkuma_r', icon: 'x' },
     {
       id: 'hackerrank',
@@ -158,7 +164,15 @@ export const PROFILE: Profile = {
     },
   ],
   certifications: [
-    { title: 'TCS CodeVita', detail: 'Rank 1970 in an international coding competition' },
-    { title: 'Version Control with Git' },
+    {
+      title: 'TCS CodeVita',
+      detail: 'Rank 1970 in an international coding competition',
+      url: 'https://drive.google.com/file/d/1qrTQOjfAz4np93VKglLMewXaNh2iyd4i/view?usp=drive_link',
+    },
+    {
+      title: 'Version Control with Git',
+      detail: 'Coursera',
+      url: 'https://www.coursera.org/account/accomplishments/verify/6SFGCMX96SUD',
+    },
   ],
 };
