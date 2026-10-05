@@ -13,7 +13,8 @@
     "lint:styles:fix": "stylelint \"src/**/*.scss\" --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "pnpm format:check && pnpm lint && pnpm lint:styles && pnpm build"
+    "check": "pnpm format:check && pnpm lint && pnpm lint:styles && pnpm build",
+    "check:contrast": "python3 scripts/check-contrast.py"
   },
   "private": true,
   "packageManager": "pnpm@12.9.1",

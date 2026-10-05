@@ -1,16 +1,17 @@
 @use 'sass:list';
 
 // --term-bg / --term-text / --term-primary (prompt, keywords) / --term-accent (caret, highlights)
+// All text colors meet WCAG AA (4.5:1) on --term-bg; some original values were adjusted in task 6.2.
 $themes: (
   'dark-forest': (
     hsl(220deg 13% 18%),
     hsl(218deg 13% 88%),
-    hsl(27deg 100% 42%),
+    hsl(27deg 100% 48%),
     hsl(39deg 100% 71%),
   ),
   'dark-day': (
     hsl(20deg 10% 12%),
-    hsl(35deg 40% 54%),
+    hsl(35deg 40% 62%),
     hsl(150deg 31% 46%),
     hsl(150deg 36% 54%),
   ),
@@ -47,26 +48,26 @@ $themes: (
   'light-vanilla': (
     hsl(190deg 18% 87%),
     hsl(198deg 13% 15%),
-    hsl(357deg 77% 56%),
-    hsl(357deg 100% 71%),
+    hsl(357deg 77% 42%),
+    hsl(357deg 100% 39%),
   ),
   'light-haze': (
     hsl(59deg 99% 94%),
     hsl(0deg 0% 10%),
     hsl(0deg 0% 40%),
-    hsl(120deg 60% 35%),
+    hsl(120deg 60% 32%),
   ),
   'light-day': (
     hsl(30deg 60% 95%),
     hsl(198deg 13% 15%),
-    hsl(357deg 77% 56%),
-    hsl(357deg 100% 71%),
+    hsl(357deg 77% 48%),
+    hsl(357deg 100% 43%),
   ),
   'light-sky': (
     hsl(200deg 50% 90%),
     hsl(0deg 0% 10%),
-    hsl(200deg 50% 40%),
-    hsl(240deg 100% 70%),
+    hsl(200deg 50% 36%),
+    hsl(240deg 100% 64%),
   ),
   'dark': (
     #1d2a35,
@@ -78,7 +79,7 @@ $themes: (
     #eff3f3,
     #334155,
     #027474,
-    #ff9d00,
+    #9c6000,
   ),
   'blue-matrix': (
     #101116,

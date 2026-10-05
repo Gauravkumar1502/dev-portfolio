@@ -73,6 +73,7 @@ Unified portfolio: neobrutalism GUI (`/`) + terminal (`/terminal`) in one Angula
 ## Code Style & Editing Rules
 
 Run `pnpm check` (prettier + eslint + stylelint + build) before finishing any task; it must pass with no warnings.
+When adding/changing theme colors also run `pnpm check:contrast` (must report 0 failures).
 Auto-fix: `pnpm format`, `pnpm lint:fix`, `pnpm lint:styles:fix`.
 
 **General** — `.editorconfig`: 2 spaces, LF, UTF-8, final newline. Prettier: width 100, single quotes, Angular HTML parser.
