@@ -1,3 +1,4 @@
+<h3 class="group__title" appReveal>Education</h3>
 <ol class="timeline">
   @for (entry of education(); track entry.school; let i = $index) {
     <li class="timeline__item" appReveal [revealDelay]="i * 100">
@@ -11,7 +12,7 @@
   }
 </ol>
 
-<h3 class="certs__title" appReveal>Certifications &amp; achievements</h3>
+<h3 class="group__title" appReveal>Certifications &amp; achievements</h3>
 <ul class="certs" appReveal [revealDelay]="100">
   @for (cert of certifications(); track cert.title) {
     <li class="certs__item">

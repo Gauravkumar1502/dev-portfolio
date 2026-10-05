@@ -80,7 +80,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   skip-to-content link; host the rails + sections.
 - **Done when:** empty sections stack correctly, no horizontal scroll at 375px.
 
-### 4.2 Header ✅ DONE
+### 4.2 Header ✅ DONE (full labels ≥1280px, short `.exp()`/`.creds()` 1024–1279px, ☰ below)
 
 - **Files:** `layout/header/header.ts/.scss`
 - **Do:** `GK` logo (`--font-logo`, routerLink `/`); nav from a `NAV_LINKS` const
@@ -136,7 +136,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Do:** one nb-card per `SkillGroup` with `nb-tag` chips.
 - **Done when:** wraps nicely, consistent heights in a row.
 
-### 4.10 Education + Certifications ✅ DONE
+### 4.10 Education + Certifications ✅ DONE (section `.credentials()`, sub-headings Education / Certifications & achievements)
 
 - **Files:** `sections/education/education.ts/.scss`
 - **Do:** timeline-style nb-cards (degree, school, dates, score); certifications list with optional link.

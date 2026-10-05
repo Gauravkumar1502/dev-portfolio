@@ -1,10 +1,19 @@
 @use 'mixins' as nb;
 
+.group__title {
+  // indented under the section title so it reads as a sub-heading
+  padding-inline-start: var(--space-4);
+  margin-block-end: var(--space-4);
+  font-size: 1.05rem;
+  color: var(--color-primary);
+}
+
 .timeline {
   display: grid;
   gap: var(--space-6);
   padding: 0 0 0 var(--space-6);
   margin-block-end: var(--space-8);
+  margin-inline-start: var(--space-4);
   list-style: none;
   border-inline-start: var(--nb-border-width) solid var(--color-muted);
 }
@@ -42,16 +51,10 @@
   color: var(--color-muted);
 }
 
-.certs__title {
-  margin-block-end: var(--space-4);
-  font-size: 1.05rem;
-  color: var(--color-text);
-}
-
 .certs {
   display: grid;
   gap: var(--space-3);
-  padding: 0;
+  padding: 0 0 0 var(--space-4);
   color: var(--color-muted);
   list-style: none;
 }

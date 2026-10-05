@@ -3,6 +3,7 @@
 // Breakpoints (CSS custom properties can't be used inside media queries).
 $bp-tablet: 768px;
 $bp-desktop: 1024px;
+$bp-wide: 1280px;
 
 @mixin tablet-up {
   @media (width >= $bp-tablet) {
@@ -18,6 +19,18 @@ $bp-desktop: 1024px;
 
 @mixin desktop-up {
   @media (width >= $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin wide-up {
+  @media (width >= $bp-wide) {
+    @content;
+  }
+}
+
+@mixin below-wide {
+  @media (width < $bp-wide) {
     @content;
   }
 }

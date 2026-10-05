@@ -7,7 +7,10 @@
     <ol class="header__links">
       @for (link of links; track link.fragment) {
         <li>
-          <a class="header__link" routerLink="." [fragment]="link.fragment">{{ link.label }}</a>
+          <a class="header__link" routerLink="." [fragment]="link.fragment">
+            <span class="header__label header__label--full">{{ link.label }}</span>
+            <span class="header__label header__label--short">{{ link.short }}</span>
+          </a>
         </li>
       }
     </ol>
