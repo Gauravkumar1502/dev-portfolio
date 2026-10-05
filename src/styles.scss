@@ -1,6 +1,7 @@
 @use 'styles/tokens';
 @use 'styles/themes/gui';
 @use 'styles/themes/terminal';
+@use 'styles/terminal-output';
 
 *,
 *::before,

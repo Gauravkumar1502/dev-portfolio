@@ -4,10 +4,17 @@ const PROJECTS_USAGE = 'usage: projects [go <number>]';
 const SOCIALS_USAGE = 'usage: socials [go <name>]';
 const RESUME_USAGE = 'usage: resume [--download]';
 
-/** Commands that present portfolio content (outputs are attached in steps 5.5 / 5.6). */
+/** Commands that present portfolio content. Rich outputs: `outputs/index.ts`. */
 export const CONTENT_COMMANDS: Command[] = [
   { name: 'about', description: 'about Gaurav Kumar' },
-  { name: 'whoami', description: 'about current user' },
+  {
+    name: 'whoami',
+    description: 'about current user',
+    text: () => [
+      'visitor',
+      'The paradox of “Who am I?” is: we never know, but, we constantly find out.',
+    ],
+  },
   { name: 'experience', description: 'my work experience' },
   {
     name: 'projects',
@@ -47,6 +54,7 @@ export const CONTENT_COMMANDS: Command[] = [
   {
     name: 'email',
     description: 'send an email to me',
+    text: (args, profile) => (args.length > 0 ? [] : `Opening mail to ${profile.email} …`),
     run: ({ args, profile, openUrl }) => {
       if (args.length > 0) return 'usage: email';
       openUrl(`mailto:${profile.email}?subject=${encodeURIComponent('Hello Gaurav')}`);

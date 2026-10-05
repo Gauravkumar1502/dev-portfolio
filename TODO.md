@@ -169,6 +169,9 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Done when:** entries are plain objects (`JSON.stringify` works); `clear` empties output but ↑ still recalls history.
 
 ### 5.2 Command registry + context ✅ DONE
+- **Change during 5.4:** commands stay plain data (`run` side effects + optional `text()`); rich output
+  components are mapped by name in `outputs/index.ts` (`OUTPUTS`) and resolved in `output-resolver.ts`
+  — avoids import cycles between store ↔ registry ↔ outputs.
 
 - **Files:** `command-registry.ts`, `commands/*.ts` (one file per command or small groups)
 - **Do:**
@@ -180,7 +183,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   - `CommandContext` built in the store (Router, ThemeStore, `window.open`, `clear`, `history`).
 - **Done when:** adding a command = one object (+ one output component); no `Type` stored in signals.
 
-### 5.3 Prompt
+### 5.3 Prompt ✅ DONE
 
 - **Files:** `prompt/prompt.ts/.scss`
 - **Do:** `visitor@gaurav:~$` label + input (`autocomplete=off`, `spellcheck=false`, `autocapitalize=off`);
@@ -188,7 +191,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   Ctrl+L clear, Ctrl+C cancel line; click anywhere in terminal focuses input; caret at end.
 - **Done when:** all shortcuts behave like satnaing demo.
 
-### 5.4 Terminal screen + welcome
+### 5.4 Terminal screen + welcome ✅ DONE
 
 - **Files:** `terminal.ts/.scss`, `outputs/welcome.ts`
 - **Do:** version line, ASCII name art + monitor art (from old `cli.component.html`), "type `help`" hint;
@@ -196,7 +199,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   `<ng-container *ngComponentOutlet="registry.outputFor(e); inputs: { args: e.args }" />`; auto-scroll to bottom.
 - **Done when:** `welcome` shows on load and on command.
 
-### 5.5 Info commands
+### 5.5 Info commands ✅ DONE
 
 - **Files:** `outputs/{help,about,experience,projects,skills,education,certifications}.ts`
 - **Do:** each output component has `args = input<string[]>([])` and injects `ProfileStore`.
@@ -204,7 +207,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   `skills`, `education`, `certifications` — all reading `ProfileStore`.
 - **Done when:** every command prints formatted output; `projects go 1` opens link.
 
-### 5.6 Action commands
+### 5.6 Action commands ✅ DONE
 
 - **Files:** `outputs/{socials,themes,history,text}.ts`
 - **Do:** `socials` (+ `go <name>`), `email` (mailto), `resume` (+ `--download`), `themes` (list) /

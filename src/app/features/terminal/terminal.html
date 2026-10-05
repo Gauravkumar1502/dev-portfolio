@@ -1,0 +1,22 @@
+<main class="terminal" aria-label="Terminal portfolio">
+  <h1 class="sr-only">Gaurav Kumar — terminal portfolio</h1>
+
+  <div class="terminal__log" role="log" aria-live="polite">
+    @for (item of rendered(); track item.entry.id) {
+      <!-- the initial banner has no typed input, so it isn't echoed -->
+      @if (item.entry.input || item.entry.name !== 'welcome') {
+        <p class="terminal__echo">
+          <app-term-info />
+          <span class="terminal__cmd">{{ item.entry.input }}</span>
+        </p>
+      }
+      @if (item.entry.error) {
+        <p class="t-output t-error">{{ item.entry.error }}</p>
+      } @else if (item.output; as output) {
+        <ng-container *ngComponentOutlet="output.component; inputs: output.inputs" />
+      }
+    }
+  </div>
+
+  <app-prompt />
+</main>

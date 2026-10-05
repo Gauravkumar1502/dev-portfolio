@@ -1,4 +1,3 @@
-import { type Type } from '@angular/core';
 import { type Profile } from './profile.model';
 
 /**
@@ -37,8 +36,11 @@ export interface Command {
   description: string;
   /** Shown on invalid arguments and in `help`, e.g. `projects [go <n>]`. */
   usage?: string;
-  /** Component rendered for an entry of this command; receives `args` (and `error`) inputs. */
-  output?: Type<unknown>;
+  /**
+   * Plain-text output for simple commands (rendered by `TextOutput`).
+   * Rich outputs are components mapped by name in `features/terminal/outputs/index.ts`.
+   */
+  text?(args: string[], profile: Profile): string | string[];
   /** Tab-completion candidates for the argument being typed. */
   complete?(args: string[], profile: Profile): string[];
   /** Side effects only. Return a string to show it as an error/usage message. */

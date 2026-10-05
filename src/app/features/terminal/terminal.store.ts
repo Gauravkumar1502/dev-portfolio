@@ -5,7 +5,7 @@ import { ProfileStore } from '../../core/state/profile.store';
 import { ThemeStore } from '../../core/state/theme.store';
 import { type CommandContext, type TermEntry } from '../../models/terminal.model';
 import { parseCommand } from './command-parser';
-import { COMMANDS, findCommand } from './command-registry';
+import { findCommand, VISIBLE_COMMANDS } from './command-registry';
 
 /**
  * Session state for one terminal screen. Provided by the `Terminal` component,
@@ -20,10 +20,14 @@ export class TerminalStore {
 
   private nextId = 0;
 
+  /** Commands listed by `help` and offered by Tab completion. */
+  readonly commands = VISIBLE_COMMANDS;
+
   /** Executed lines, oldest first. Plain data only. */
-  readonly entries = signal<TermEntry[]>([this.createEntry('welcome')]);
+  /** Starts with the welcome banner (empty `input` = not echoed as a typed command). */
+  readonly entries = signal<TermEntry[]>([{ ...this.createEntry('welcome'), input: '' }]);
   /** Submitted inputs, newest first. Kept separately so `clear` doesn't wipe ↑ recall. */
-  readonly history = signal<string[]>(['welcome']);
+  readonly history = signal<string[]>([]);
   /** Current text in the prompt. */
   readonly input = signal('');
   /** Completion candidates shown when Tab finds several matches. */
@@ -50,6 +54,17 @@ export class TerminalStore {
     // `clear` empties the screen and is not echoed itself.
     if (entry.name === 'clear' && !entry.error) return;
     this.entries.update((list) => [...list, entry]);
+  }
+
+  /** Ctrl+C: abandon the current line (echoed with `^C`). */
+  cancel(): void {
+    this.entries.update((list) => [
+      ...list,
+      { id: this.nextId++, input: `${this.input()}^C`, name: '', args: [] },
+    ]);
+    this.input.set('');
+    this.hints.set([]);
+    this.pointer.set(-1);
   }
 
   clear(): void {
@@ -85,7 +100,7 @@ export class TerminalStore {
     const partial = typingName ? name : endsWithSpace ? '' : (args.at(-1) ?? '');
 
     const candidates = typingName
-      ? COMMANDS.filter((c) => c.description).map((c) => c.name)
+      ? this.commands.map((c) => c.name)
       : (findCommand(name)?.complete?.(endsWithSpace ? [...args, ''] : args, this.profile()) ?? []);
     const matches = candidates.filter((c) => c.startsWith(partial.toLowerCase()));
 

@@ -1,36 +1,30 @@
-.terminal {
+@use 'mixins' as nb;
+
+:host {
+  display: block;
   min-height: 100dvh;
-  padding: var(--space-4);
-  font-family: var(--font-mono);
   color: var(--term-text);
   background: var(--term-bg);
 }
 
-.terminal__line {
+.terminal {
+  padding: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  @include nb.tablet-up {
+    padding: var(--space-6) var(--space-8);
+    font-size: 1rem;
+  }
+}
+
+.terminal__echo {
   display: flex;
-  gap: var(--space-2);
-  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 var(--space-2);
 }
 
-.terminal__prompt {
-  color: var(--term-primary);
-}
-
-.terminal__debug,
-.terminal__hints {
-  color: var(--term-accent);
-}
-
-.terminal__error {
-  color: var(--term-primary);
-}
-
-.terminal__input {
-  flex: 1;
-  font: inherit;
-  color: inherit;
-  caret-color: var(--term-accent);
-  outline: none;
-  background: transparent;
-  border: none;
+.terminal__cmd {
+  overflow-wrap: anywhere;
 }

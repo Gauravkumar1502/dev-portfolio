@@ -3,7 +3,7 @@ import { type Command } from '../../../models/terminal.model';
 
 const THEMES_USAGE = 'usage: themes [list | set <theme>]';
 
-/** Terminal/system commands (outputs are attached in steps 5.4 / 5.6). */
+/** Terminal/system commands. Rich outputs: `outputs/index.ts`. */
 export const TERMINAL_COMMANDS: Command[] = [
   { name: 'help', description: 'check available commands' },
   { name: 'welcome', description: 'display hero section' },
@@ -21,8 +21,17 @@ export const TERMINAL_COMMANDS: Command[] = [
     },
   },
   { name: 'history', description: 'view command history' },
-  { name: 'echo', description: 'print out anything', usage: 'usage: echo <text>' },
-  { name: 'pwd', description: 'print current working directory' },
+  {
+    name: 'echo',
+    description: 'print out anything',
+    usage: 'usage: echo <text>',
+    text: (args) => args.join(' '),
+  },
+  {
+    name: 'pwd',
+    description: 'print current working directory',
+    text: () => '/home/gaurav/portfolio',
+  },
   {
     name: 'clear',
     description: 'clear the terminal (Ctrl+L)',
@@ -31,9 +40,24 @@ export const TERMINAL_COMMANDS: Command[] = [
   {
     name: 'gui',
     description: 'switch to the GUI portfolio',
+    text: () => 'Switching to GUI …',
     run: ({ navigateToGui }) => navigateToGui(),
   },
-  { name: 'exit', description: 'exit the terminal' },
+  {
+    name: 'exit',
+    description: 'exit the terminal',
+    text: () => [
+      "For security reasons a browser tab can't close itself 🙂",
+      "Type 'gui' to switch to the GUI portfolio instead.",
+    ],
+  },
   // Easter egg: works but isn't listed in `help`.
-  { name: 'sudo', description: '' },
+  {
+    name: 'sudo',
+    description: '',
+    text: () => [
+      'visitor is not in the sudoers file. This incident will be reported. 😄',
+      'Nice try though!',
+    ],
+  },
 ];

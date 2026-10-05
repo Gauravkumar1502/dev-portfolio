@@ -10,6 +10,12 @@ $bp-desktop: 1024px;
   }
 }
 
+@mixin below-tablet {
+  @media (width < $bp-tablet) {
+    @content;
+  }
+}
+
 @mixin desktop-up {
   @media (width >= $bp-desktop) {
     @content;
