@@ -250,7 +250,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ## 7. Deploy
 
-### 7.1 GitHub Actions workflow
+### 7.1 GitHub Actions workflow ✅ DONE (`.github/workflows/deploy.yml`, push to main/master only)
 
 - **Files:** `.github/workflows/deploy.yml`
 - **Do:** checkout → `pnpm/action-setup` → setup-node (cache pnpm) → `pnpm install --frozen-lockfile`
@@ -259,6 +259,10 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Done when:** workflow green on push to `main`.
 
 ### 7.2 Repo
+- [ ] Create `dev-portfolio` repo on GitHub (public, no README) and `git remote add origin … && git push -u origin main`
+- [ ] Settings → Pages → Build and deployment → Source: **GitHub Actions** (one-time; nothing else needed —
+      the workflow uses the built-in `GITHUB_TOKEN`, no personal token/secret)
+- [ ] Check the Actions run is green and `/dev-portfolio/` + `/dev-portfolio/terminal` load
 
 - **Do:** create `dev-portfolio` on GitHub, push, enable Pages (source: GitHub Actions);
   update `resumeUrl`/links; optionally redirect the old portfolio + Terminal-Portfolio to the new URL.

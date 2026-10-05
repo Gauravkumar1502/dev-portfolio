@@ -1,0 +1,73 @@
+# Builds the portfolio and publishes it to GitHub Pages on every push to main/master.
+# One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; a newer push cancels an in-progress run.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        # version comes from "packageManager" in package.json
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint & format check
+        run: |
+          pnpm format:check
+          pnpm lint
+          pnpm lint:styles
+          pnpm check:contrast
+
+      - name: Build
+        run: pnpm build:gh
+
+      - name: Prepare Pages output
+        working-directory: dist/dev-portfolio/browser
+        run: |
+          # SPA fallback: GitHub Pages serves 404.html for unknown paths like /dev-portfolio/terminal
+          cp index.html 404.html
+          touch .nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/dev-portfolio/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
