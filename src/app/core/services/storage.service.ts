@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 
 /** localStorage wrapper that never throws (private mode, blocked storage, etc.). */
-@Injectable({ providedIn: 'root' })
+@Service()
 export class StorageService {
   get<T>(key: string): T | null {
     try {

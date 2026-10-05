@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { effect, inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Service, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { StorageService } from '../services/storage.service';
@@ -7,7 +7,7 @@ import { type AppMode } from '../../models/theme.model';
 
 const MODE_KEY = 'portfolio:mode';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class UiStore {
   private readonly storage = inject(StorageService);
 

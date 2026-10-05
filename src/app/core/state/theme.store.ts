@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { type GuiTheme, TERMINAL_THEMES, type TerminalTheme } from '../../models/theme.model';
 import { UiStore } from './ui.store';
@@ -7,7 +7,7 @@ import { UiStore } from './ui.store';
 const GUI_KEY = 'portfolio:gui-theme';
 const TERM_KEY = 'portfolio:terminal-theme';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ThemeStore {
   private readonly storage = inject(StorageService);
   private readonly ui = inject(UiStore);

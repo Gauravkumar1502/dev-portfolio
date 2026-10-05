@@ -16,6 +16,7 @@ export interface Experience {
 
 export interface Project {
   name: string;
+  featured?: boolean;
   stack: string[];
   description: string;
   repo?: string;
@@ -47,6 +48,11 @@ export interface Profile {
   title: string;
   tagline: string;
   intro: string;
+  /** Company name highlighted inside `intro` in the GUI hero. */
+  currentCompany: string;
+  location: string;
+  about: string[];
+  aboutTech: string[];
   email: string;
   resumeUrl: string;
   socials: Social[];

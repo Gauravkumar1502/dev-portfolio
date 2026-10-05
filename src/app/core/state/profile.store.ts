@@ -1,8 +1,8 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Service, signal } from '@angular/core';
 import { PROFILE } from '../../data/profile.data';
 
 /** Single source of truth for portfolio content, shared by GUI and terminal. */
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ProfileStore {
   private readonly profile = signal(PROFILE).asReadonly();
 

@@ -1,12 +1,31 @@
 import { type Profile } from '../models/profile.model';
 
-// TODO(step 2): fill remaining content (about text, more projects, LeetCode URL).
 export const PROFILE: Profile = {
   name: 'Gaurav Kumar',
   title: 'Java Developer',
   tagline: 'I build scalable software solutions.',
   intro:
-    'Backend developer building AI-agent platforms with Spring Boot, Spring AI, RAG pipelines and MCP. Currently at RedBlink Technologies.',
+    'I’m a backend developer who designs efficient APIs, scalable data models and AI-powered workflows with Java, Spring Boot and Spring AI. Currently at RedBlink Technologies, I build Knolli.ai, an AI-agent platform, working on RAG pipelines, MCP integrations and CRM copilots.',
+  currentCompany: 'RedBlink Technologies',
+  location: 'Mohali, India',
+  about: [
+    'My coding adventure kicked off back in 2015 with NFS and Vice City. Racing virtual cars turned out to be my unexpected gateway into tech. In school I started playing with C and Java, building NetBeans desktop apps that probably confused more people than they helped.',
+    'In college I dove deep into programming, databases and web technologies, earning a BCA and then an MCA in Cloud Computing & DevOps, and learning how to turn complex problems into clean, working solutions.',
+    'Since then I’ve shipped CI/CD pipelines and Spring Boot APIs at Dortex AI, integrated restaurant POS systems with a digital-signage platform at Etasens, and today I build AI agents, RAG pipelines and MCP integrations at RedBlink Technologies.',
+    'When I’m not coding you’ll find me exploring new tech, watching sci-fi or playing video games. Always up for a chat about tech, so feel free to reach out!',
+  ],
+  aboutTech: [
+    'Java',
+    'Spring Boot',
+    'Spring AI',
+    'RAG & vector search',
+    'MCP',
+    'Angular 17+',
+    'PostgreSQL',
+    'Docker',
+    'AWS (EC2, S3, RDS)',
+    'GitHub Actions',
+  ],
   email: 'gaurav.kumar.deve@gmail.com',
   resumeUrl: 'resume/GK_Resume.pdf',
   socials: [
@@ -68,9 +87,46 @@ export const PROFILE: Profile = {
   projects: [
     {
       name: 'BEDEV Coding Platform',
+      featured: true,
       stack: ['Angular 17', 'Java', 'Spring Boot', 'JPA', 'MySQL', 'WebSocket'],
       description:
         'A LeetCode-inspired coding platform supporting code execution, submissions and real-time competitive features.',
+      repo: 'https://github.com/Gauravkumar1502/Be-Dev',
+    },
+    {
+      name: 'LinkedIn Automate CLI',
+      featured: true,
+      stack: ['Java', 'ChatGPT API', 'CLI'],
+      description:
+        'A command-line tool that automates LinkedIn posting, using ChatGPT to generate engaging, personalised posts.',
+      repo: 'https://github.com/Gauravkumar1502/LinkedinAutomateCLI',
+    },
+    {
+      name: 'KeepNotes',
+      stack: ['Angular 17', '.NET', 'REST API'],
+      description: 'A note-taking app with an Angular v17 frontend and a .NET REST API backend.',
+      repo: 'https://github.com/Gauravkumar1502/KeepNotes',
+    },
+    {
+      name: 'P2P Chatting',
+      stack: ['Java', 'Sockets', 'Multithreading'],
+      description:
+        'A multi-client chat server in Java with concurrent client handling over sockets and a custom messaging protocol.',
+      repo: 'https://github.com/Gauravkumar1502/P2PChatting',
+    },
+    {
+      name: 'SpaceX Update',
+      stack: ['Angular 19', 'TypeScript'],
+      description: 'An Angular app showing the latest SpaceX launch updates.',
+      repo: 'https://github.com/Gauravkumar1502/SpaceX-Update',
+      live: 'https://space-x-update.vercel.app',
+    },
+    {
+      name: 'Terminal Portfolio (v1)',
+      stack: ['HTML', 'CSS', 'JavaScript'],
+      description: 'The original terminal-style portfolio with interactive commands and themes.',
+      repo: 'https://github.com/Gauravkumar1502/Terminal-Portfolio',
+      live: 'https://gauravkumar1502.github.io/Terminal-Portfolio/',
     },
   ],
   skills: [
