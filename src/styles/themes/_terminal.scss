@@ -1,0 +1,34 @@
+@use "sass:list";
+
+// --term-bg / --term-text / --term-primary (prompt, keywords) / --term-accent (caret, highlights)
+$themes: (
+  'dark-forest': (hsl(220 13% 18%), hsl(218 13% 88%), hsl(27 100% 42%), hsl(39 100% 71%)),
+  'dark-day': (hsl(20 10% 12%), hsl(35 40% 54%), hsl(150 31% 46%), hsl(150 36% 54%)),
+  'dark-ocean': (hsl(194 100% 4%), hsl(218 13% 88%), hsl(143 100% 33%), hsl(79 80% 51%)),
+  'dark-space': (hsl(252 7% 12%), hsl(218 13% 88%), hsl(199 100% 59%), hsl(185 100% 64%)),
+  'dark-night': (hsl(240 14% 9%), hsl(218 13% 88%), hsl(45 100% 50%), hsl(234 100% 72%)),
+  'dark-cave': (hsl(0 0% 0%), hsl(218 13% 88%), hsl(82 100% 37%), hsl(146 60% 56%)),
+  'dark-sea': (hsl(0 0% 10%), hsl(0 0% 90%), hsl(120 100% 60%), hsl(210 100% 60%)),
+  'light-vanilla': (hsl(190 18% 87%), hsl(198 13% 15%), hsl(357 77% 56%), hsl(357 100% 71%)),
+  'light-haze': (hsl(59 99% 94%), hsl(0 0% 10%), hsl(0 0% 40%), hsl(120 60% 35%)),
+  'light-day': (hsl(30 60% 95%), hsl(198 13% 15%), hsl(357 77% 56%), hsl(357 100% 71%)),
+  'light-sky': (hsl(200 50% 90%), hsl(0 0% 10%), hsl(200 50% 40%), hsl(240 100% 70%)),
+  'dark': (#1d2a35, #cbd5e1, #05ce91, #ff9d00),
+  'light': (#eff3f3, #334155, #027474, #ff9d00),
+  'blue-matrix': (#101116, #ffffff, #00ff9c, #60fdff),
+  'espresso': (#323232, #f7f7f7, #e1e48b, #a5c260),
+  'green-goblin': (#000000, #ffffff, #e5e500, #04a500),
+  'ubuntu': (#2d0922, #ffffff, #80d932, #80d932),
+);
+
+@each $name, $c in $themes {
+  [data-theme='term-#{$name}'] {
+    --term-bg: #{list.nth($c, 1)};
+    --term-text: #{list.nth($c, 2)};
+    --term-primary: #{list.nth($c, 3)};
+    --term-accent: #{list.nth($c, 4)};
+    --color-bg: #{list.nth($c, 1)};
+    --color-text: #{list.nth($c, 2)};
+    --color-primary: #{list.nth($c, 3)};
+  }
+}

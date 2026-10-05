@@ -1,0 +1,58 @@
+export interface Social {
+  id: string;
+  label: string;
+  url: string;
+  icon: string;
+}
+
+export interface Experience {
+  company: string;
+  role: string;
+  location: string;
+  start: string;
+  end: string;
+  points: string[];
+}
+
+export interface Project {
+  name: string;
+  stack: string[];
+  description: string;
+  repo?: string;
+  live?: string;
+}
+
+export interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
+export interface Education {
+  school: string;
+  degree: string;
+  location: string;
+  start: string;
+  end: string;
+  score: string;
+}
+
+export interface Certification {
+  title: string;
+  detail?: string;
+  url?: string;
+}
+
+export interface Profile {
+  name: string;
+  title: string;
+  tagline: string;
+  intro: string;
+  email: string;
+  resumeUrl: string;
+  socials: Social[];
+  experience: Experience[];
+  projects: Project[];
+  skills: SkillGroup[];
+  education: Education[];
+  certifications: Certification[];
+}

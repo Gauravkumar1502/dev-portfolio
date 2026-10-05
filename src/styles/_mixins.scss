@@ -1,0 +1,38 @@
+// Neobrutalism building blocks. Use in components via `@use 'mixins' as nb;`.
+
+@mixin border {
+  border: var(--nb-border-width) solid var(--nb-border);
+  border-radius: var(--nb-radius);
+}
+
+@mixin shadow($x: var(--nb-shadow-x), $y: var(--nb-shadow-y)) {
+  box-shadow: $x $y 0 0 var(--nb-shadow);
+}
+
+@mixin surface {
+  @include border;
+  @include shadow;
+  background: var(--nb-surface);
+  color: var(--nb-on-surface);
+}
+
+@mixin pressable {
+  transition: transform 120ms ease, box-shadow 120ms ease;
+
+  &:hover {
+    transform: translate(-2px, -2px);
+    @include shadow(calc(var(--nb-shadow-x) + 2px), calc(var(--nb-shadow-y) + 2px));
+  }
+
+  &:active {
+    transform: translate(var(--nb-shadow-x), var(--nb-shadow-y));
+    box-shadow: none;
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: var(--nb-border-width) dashed var(--color-primary);
+    outline-offset: 4px;
+  }
+}

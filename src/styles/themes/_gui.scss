@@ -1,0 +1,26 @@
+// Dev look from the original portfolio (olive / lime), with neobrutal tokens.
+[data-theme='gui-dark'] {
+  color-scheme: dark;
+  --color-bg: rgb(27 30 22);
+  --color-text: rgb(224 228 212);
+  --color-muted: rgb(194 202 178);
+  --color-primary: rgb(151 217 69);
+  --color-on-primary: rgb(16 32 0);
+  --nb-surface: rgb(39 43 33);
+  --nb-on-surface: rgb(224 228 212);
+  --nb-border: rgb(151 217 69);
+  --nb-shadow: rgb(0 0 0);
+}
+
+[data-theme='gui-light'] {
+  color-scheme: light;
+  --color-bg: rgb(247 251 234);
+  --color-text: rgb(25 29 19);
+  --color-muted: rgb(66 73 55);
+  --color-primary: rgb(63 105 0);
+  --color-on-primary: rgb(255 255 255);
+  --nb-surface: rgb(255 255 255);
+  --nb-on-surface: rgb(25 29 19);
+  --nb-border: rgb(25 29 19);
+  --nb-shadow: rgb(25 29 19);
+}

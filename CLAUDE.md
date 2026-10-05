@@ -57,3 +57,14 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use the `providedIn: 'root'` option for singleton services
 - Prefer the `@Service` decorator over `@Injectable({providedIn: 'root'})` for new singleton services (Angular v22+)
 - Use the `inject()` function instead of constructor injection
+
+## This Project
+
+Unified portfolio: neobrutalism GUI (`/`) + terminal (`/terminal`) in one Angular 22 app. Work is tracked step by step in `TODO.md` — do one task at a time and tick it off.
+
+- Package manager: **pnpm** (`pnpm start`, `pnpm build`, `pnpm build:gh` for GitHub Pages `/dev-portfolio/`). No unit tests.
+- Styling: SCSS only, no Material / Tailwind. Behaviour from `@angular/cdk` + `@angular/aria`. In components: `@use 'mixins' as nb;` (resolved from `src/styles`).
+- Theme: CSS variables keyed by `<html data-theme>`; set only through `ThemeStore` (`core/state/theme.store.ts`).
+- Content: edit `src/app/data/profile.data.ts`; read it via `ProfileStore`, never import the data file in components.
+- Global state lives in `core/state/*` signal stores; terminal session state stays in a component-provided `TerminalStore`.
+- Layout: `core/` (stores, services, guards), `data/`, `models/`, `shared/ui` (`nb-*` primitives), `features/gui`, `features/terminal`.
