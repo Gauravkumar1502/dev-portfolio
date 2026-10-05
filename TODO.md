@@ -41,13 +41,12 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ## 3. Shared UI primitives (`shared/ui`)
 
-### 3.1 `app-icon` ✅ DONE
+### 3.1 `app-icon` ✅ DONE (Font Awesome)
 
-- **Files:** `shared/ui/icon/icon.ts`, `shared/ui/icon/icons.ts` (name → SVG path map)
-- **Do:** `name = input.required<IconName>()`, `size = input(20)`; inline `<svg>` with `currentColor`,
-  `aria-hidden="true"` by default, optional `label` input → `role="img"` + `aria-label`.
-  Icons: github, linkedin, x, hackerrank, codepen, leetcode, sun, moon, menu, close, terminal, external, download, mail.
-- **Done when:** all icons render at size 16/24 in both GUI themes.
+- **Files:** `shared/ui/icon/icon.ts`, `shared/ui/icon/icons.ts` (registry name → FA icon | `{ asset }`)
+- **Do:** wrapper over `@fortawesome/angular-fontawesome` (free solid + brands); custom SVGs from
+  `public/icons/` via CSS mask (follows `currentColor`). `name`, `size` (px), optional `label` → `role="img"`.
+- **Rule:** new icon = add to `ICONS`. If Font Awesome lacks it → **ask Gaurav for an SVG** in `public/icons/`.
 
 ### 3.2 `nb-button` ✅ DONE
 

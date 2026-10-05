@@ -1,0 +1,6 @@
+# Native build scripts used by the Angular CLI toolchain (pnpm 10+ blocks them by default).
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true

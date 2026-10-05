@@ -67,6 +67,7 @@ Unified portfolio: neobrutalism GUI (`/`) + terminal (`/terminal`) in one Angula
 - Theme: CSS variables keyed by `<html data-theme>`; set only through `ThemeStore` (`core/state/theme.store.ts`).
 - Content: edit `src/app/data/profile.data.ts`; read it via `ProfileStore`, never import the data file in components.
 - Global state lives in `core/state/*` signal stores; terminal session state stays in a component-provided `TerminalStore`.
+- Icons: Font Awesome Free via `<app-icon name="…">` only (registry `shared/ui/icon/icons.ts`). Never hand-build SVG icons/images/logos — **stop and ask Gaurav** to put the asset in `public/` (e.g. `public/icons/`).
 - Layout: `core/` (stores, services, guards), `data/`, `models/`, `shared/ui` (`nb-*` primitives), `features/gui`, `features/terminal`.
 
 ## Code Style & Editing Rules
