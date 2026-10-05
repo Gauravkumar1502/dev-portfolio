@@ -64,12 +64,6 @@
   }
 }
 
-.mobile-menu__fn--small {
-  flex-wrap: wrap;
-  font-size: 0.875rem;
-  overflow-wrap: anywhere;
-}
-
 .mobile-menu__arg {
   color: var(--color-text);
 }
@@ -83,15 +77,17 @@
   border-block-start: 2px solid var(--color-muted);
 }
 
-.mobile-menu__connect {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  align-items: center;
-}
+.mobile-menu__email {
+  @include nb.focus-ring;
 
-.mobile-menu__fn-name {
-  color: var(--color-primary);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-primary);
+  }
 }
 
 .mobile-menu__switch {

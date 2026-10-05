@@ -36,15 +36,8 @@
   </nav>
 
   <div class="mobile-menu__bottom">
-    <div class="mobile-menu__connect">
-      <span class="mobile-menu__fn-name" aria-hidden="true">.connect(</span>
-      <app-social-links [iconSize]="20" />
-      <span class="mobile-menu__fn-name" aria-hidden="true">)</span>
-    </div>
-
-    <a class="mobile-menu__fn mobile-menu__fn--small" [href]="mailto()">
-      .mailTo(<span class="mobile-menu__arg">'{{ email() }}'</span>)
-    </a>
+    <app-social-links [iconSize]="20" />
+    <a class="mobile-menu__email" [href]="mailto()">{{ email() }}</a>
 
     <button
       type="button"

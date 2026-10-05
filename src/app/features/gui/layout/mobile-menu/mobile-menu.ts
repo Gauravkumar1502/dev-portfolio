@@ -53,7 +53,8 @@ export function openMobileMenu(injector: Injector): DialogRef<unknown, MobileMen
     positionStrategy: createGlobalPositionStrategy(injector).top('0').right('0'),
     backdropClass: 'cdk-overlay-dark-backdrop',
     panelClass: 'mobile-menu-panel',
-    autoFocus: 'first-tabbable',
+    // Focus the panel itself so no focus ring flashes on the close button; Tab still enters the menu.
+    autoFocus: 'dialog',
     restoreFocus: true,
   });
 }
