@@ -1,5 +1,27 @@
 // Neobrutalism building blocks. Use in components via `@use 'mixins' as nb;`.
 
+// Breakpoints (CSS custom properties can't be used inside media queries).
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+@mixin tablet-up {
+  @media (width >= $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (width >= $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin below-desktop {
+  @media (width < $bp-desktop) {
+    @content;
+  }
+}
+
 @mixin border {
   border: var(--nb-border-width) solid var(--nb-border);
   border-radius: var(--nb-radius);

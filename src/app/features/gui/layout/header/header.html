@@ -1,0 +1,48 @@
+<header class="header">
+  <a class="header__logo" routerLink="." fragment="top" aria-label="Gaurav Kumar, back to top">
+    G<span class="header__logo-k">K</span>
+  </a>
+
+  <nav class="header__nav" aria-label="Main">
+    <ol class="header__links">
+      @for (link of links; track link.fragment) {
+        <li>
+          <a class="header__link" routerLink="." [fragment]="link.fragment">{{ link.label }}</a>
+        </li>
+      }
+    </ol>
+  </nav>
+
+  <div class="header__actions">
+    <button
+      type="button"
+      nb-button
+      variant="ghost"
+      size="sm"
+      class="header__theme"
+      [attr.aria-label]="theme.isGuiDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+      (click)="theme.toggleGuiTheme()"
+    >
+      <app-icon [name]="theme.isGuiDark() ? 'sun' : 'moon'" [size]="18" />
+    </button>
+
+    <a nb-button size="sm" class="header__terminal" routerLink="/terminal">
+      <app-icon name="terminal" [size]="16" />
+      terminal
+    </a>
+
+    <button
+      type="button"
+      nb-button
+      variant="outline"
+      size="sm"
+      class="header__menu"
+      aria-controls="mobile-menu"
+      [attr.aria-expanded]="ui.mobileMenuOpen()"
+      [attr.aria-label]="ui.mobileMenuOpen() ? 'Close menu' : 'Open menu'"
+      (click)="toggleMenu()"
+    >
+      <app-icon [name]="ui.mobileMenuOpen() ? 'close' : 'menu'" [size]="18" />
+    </button>
+  </div>
+</header>

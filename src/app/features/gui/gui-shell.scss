@@ -1,26 +1,52 @@
+@use 'mixins' as nb;
+
+.skip-link {
+  @include nb.surface;
+
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  translate: 0 -200%;
+
+  &:focus-visible {
+    translate: 0 0;
+  }
+}
+
 .gui {
+  min-height: 100dvh;
+}
+
+.gui__main {
+  width: 100%;
+  max-width: var(--container-max);
+  padding-inline: var(--space-4);
+  margin-inline: auto;
+  outline: none;
+
+  @include nb.tablet-up {
+    padding-inline: var(--space-8);
+  }
+
+  @include nb.desktop-up {
+    // leave room for the fixed side rails (4.3)
+    padding-inline: calc(var(--rail-width) + var(--space-8));
+  }
+}
+
+.gui__section {
+  padding-block: clamp(4rem, 10vh, 7rem);
+}
+
+.gui__section--hero {
   display: grid;
-  gap: var(--space-6);
-  padding: var(--space-6);
+  align-content: center;
+  min-height: calc(100dvh - var(--header-height));
+  padding-block: var(--space-8);
 }
 
-.gui__row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  align-items: center;
-}
-
-.gui__row--tight {
-  gap: var(--space-2);
-}
-
-.gui__preview {
-  padding-block: var(--space-8) 50vh;
-}
-
-.gui__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-  gap: var(--space-6);
+.gui__placeholder {
+  color: var(--color-muted);
 }

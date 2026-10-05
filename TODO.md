@@ -73,14 +73,14 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ## 4. GUI (`features/gui`)
 
-### 4.1 GUI shell layout
+### 4.1 GUI shell layout ✅ DONE
 
 - **Files:** `gui-shell.ts/.scss`
 - **Do:** grid: header (sticky) + `<main id="content">` (max-width `--container-max`, side padding for rails);
   skip-to-content link; host the rails + sections.
 - **Done when:** empty sections stack correctly, no horizontal scroll at 375px.
 
-### 4.2 Header
+### 4.2 Header ✅ DONE
 
 - **Files:** `layout/header/header.ts/.scss`
 - **Do:** `GK` logo (`--font-logo`, routerLink `/`); nav from a `NAV_LINKS` const

@@ -1,0 +1,29 @@
+<a class="skip-link" href="#content" (click)="$event.preventDefault(); content.focus()">
+  Skip to content
+</a>
+
+<div id="top" class="gui">
+  <app-header />
+
+  <main #content id="content" class="gui__main" tabindex="-1">
+    <!-- Hero goes here (4.5) -->
+    <section class="gui__section gui__section--hero" aria-label="Introduction">
+      <p class="gui__placeholder">Hero — task 4.5</p>
+    </section>
+
+    @for (section of sections; track section.fragment; let i = $index) {
+      <section
+        class="gui__section"
+        [id]="section.fragment"
+        [attr.aria-labelledby]="section.fragment + '-title'"
+      >
+        <app-section-title
+          [id]="section.fragment + '-title'"
+          [index]="i + 1"
+          [label]="section.label"
+        />
+        <p class="gui__placeholder">Coming in step 4.</p>
+      </section>
+    }
+  </main>
+</div>
