@@ -5,3 +5,32 @@
   color: var(--term-text);
   background: var(--term-bg);
 }
+
+.terminal__line {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.terminal__prompt {
+  color: var(--term-primary);
+}
+
+.terminal__debug,
+.terminal__hints {
+  color: var(--term-accent);
+}
+
+.terminal__error {
+  color: var(--term-primary);
+}
+
+.terminal__input {
+  flex: 1;
+  font: inherit;
+  color: inherit;
+  caret-color: var(--term-accent);
+  outline: none;
+  background: transparent;
+  border: none;
+}

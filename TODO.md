@@ -153,7 +153,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ## 5. Terminal (`features/terminal`)
 
-### 5.1 TerminalStore + parser (data-only entries)
+### 5.1 TerminalStore + parser (data-only entries) ✅ DONE
 
 - **Files:** `terminal.store.ts`, `command-parser.ts`, `models/terminal.model.ts`
 - **Pattern:** state holds **plain data only**, never component classes (Angular Discord advice:
@@ -168,7 +168,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   - Parser: trim, split on whitespace, lowercase command name, keep quoted strings for `echo`.
 - **Done when:** entries are plain objects (`JSON.stringify` works); `clear` empties output but ↑ still recalls history.
 
-### 5.2 Command registry + context
+### 5.2 Command registry + context ✅ DONE
 
 - **Files:** `command-registry.ts`, `commands/*.ts` (one file per command or small groups)
 - **Do:**

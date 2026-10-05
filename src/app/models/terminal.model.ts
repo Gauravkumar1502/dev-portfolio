@@ -1,14 +1,18 @@
 import { type Type } from '@angular/core';
+import { type Profile } from './profile.model';
 
-export interface TermOutput {
-  component: Type<unknown>;
-  inputs?: Record<string, unknown>;
-}
-
+/**
+ * One executed line. Plain, JSON-serialisable data only: the output component is
+ * resolved from the command registry at render time (never stored in state).
+ */
 export interface TermEntry {
   id: number;
   input: string;
-  output?: TermOutput;
+  /** Lower-cased command name; empty for a blank line. */
+  name: string;
+  args: string[];
+  /** Usage / validation message produced by `Command.run`. */
+  error?: string;
 }
 
 export interface ParsedCommand {
@@ -17,20 +21,26 @@ export interface ParsedCommand {
   raw: string;
 }
 
-/** Side-effect hooks a command may use; filled in by the terminal feature. */
+/** Side-effect hooks available to `Command.run`. Built by `TerminalStore`. */
 export interface CommandContext {
-  parsed: ParsedCommand;
+  args: string[];
+  profile: Profile;
   navigateToGui(): void;
-  setTheme(theme: string): boolean;
+  setTheme(name: string): boolean;
   clear(): void;
   openUrl(url: string): void;
-  history(): string[];
+  download(url: string, fileName: string): void;
 }
 
 export interface Command {
   name: string;
   description: string;
+  /** Shown on invalid arguments and in `help`, e.g. `projects [go <n>]`. */
   usage?: string;
-  complete?(args: string[]): string[];
-  run(ctx: CommandContext): TermOutput | void;
+  /** Component rendered for an entry of this command; receives `args` (and `error`) inputs. */
+  output?: Type<unknown>;
+  /** Tab-completion candidates for the argument being typed. */
+  complete?(args: string[], profile: Profile): string[];
+  /** Side effects only. Return a string to show it as an error/usage message. */
+  run?(ctx: CommandContext): string | undefined | void;
 }
