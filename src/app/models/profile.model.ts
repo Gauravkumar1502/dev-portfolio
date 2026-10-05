@@ -1,8 +1,10 @@
+import type { IconName } from '../shared/ui/icon/icons';
+
 export interface Social {
   id: string;
   label: string;
   url: string;
-  icon: string;
+  icon: IconName;
 }
 
 export interface Experience {

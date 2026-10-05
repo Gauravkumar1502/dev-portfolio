@@ -82,7 +82,7 @@ Auto-fix: `pnpm format`, `pnpm lint:fix`, `pnpm lint:styles:fix`.
 - No `public` keyword; mark template-only members `protected`, internals `private`, injected deps `private readonly`.
 - No `any`, `===` only, no `console.log` (warn/error allowed).
 - Files: 2025 style guide names (`hero.ts`, `theme.store.ts`), one component/service per file.
-- Selectors: `app-*` components, `nb-*` / `[nbX]` for shared neobrutal primitives (enforced).
+- Selectors: `app-*` components, `nb-*` elements / `[nb-*]` attribute components (e.g. `<button nb-button>`) for shared neobrutal primitives (enforced).
 - Never import `CommonModule`, `NgClass`, `NgStyle`, Angular Material, or `data/profile.data` outside `ProfileStore` (enforced).
 
 **HTML templates**

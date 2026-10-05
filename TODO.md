@@ -41,7 +41,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ## 3. Shared UI primitives (`shared/ui`)
 
-### 3.1 `app-icon`
+### 3.1 `app-icon` ✅ DONE
 
 - **Files:** `shared/ui/icon/icon.ts`, `shared/ui/icon/icons.ts` (name → SVG path map)
 - **Do:** `name = input.required<IconName>()`, `size = input(20)`; inline `<svg>` with `currentColor`,
@@ -49,10 +49,10 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   Icons: github, linkedin, x, hackerrank, codepen, leetcode, sun, moon, menu, close, terminal, external, download, mail.
 - **Done when:** all icons render at size 16/24 in both GUI themes.
 
-### 3.2 `nb-button`
+### 3.2 `nb-button` ✅ DONE
 
 - **Files:** `shared/ui/button/nb-button.ts` (+ `.scss`)
-- **Do:** attribute selector `button[nbButton], a[nbButton]`; `variant = input<'solid'|'outline'|'ghost'>('solid')`,
+- **Do:** attribute selector `button[nb-button], a[nb-button]`; `variant = input<'solid'|'outline'|'ghost'>('solid')`,
   `size = input<'sm'|'md'>('md')`; host class bindings; `nb.surface` + `nb.pressable` + `nb.focus-ring`.
 - **Done when:** works as `<a>` and `<button>`, keyboard focus visible, hover lift / active press.
 

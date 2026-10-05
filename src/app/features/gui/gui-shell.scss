@@ -1,5 +1,12 @@
-@use 'mixins' as nb;
-
 .gui {
+  display: grid;
+  gap: var(--space-6);
   padding: var(--space-6);
+}
+
+.gui__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
 }

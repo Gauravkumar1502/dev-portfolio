@@ -1,0 +1,54 @@
+@use 'mixins' as nb;
+
+:host {
+  @include nb.border;
+  @include nb.shadow;
+  @include nb.pressable;
+  @include nb.focus-ring;
+
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-on-primary);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--color-primary);
+}
+
+:host(.nb-button--outline) {
+  color: var(--color-primary);
+  background: var(--color-bg);
+  border-color: var(--color-primary);
+}
+
+:host(.nb-button--ghost) {
+  color: var(--color-primary);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+}
+
+:host(.nb-button--sm) {
+  --nb-shadow-x: 3px;
+  --nb-shadow-y: 3px;
+
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.875rem;
+}
+
+:host([disabled]),
+:host([aria-disabled='true']) {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
