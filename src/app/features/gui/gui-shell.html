@@ -7,9 +7,8 @@
   <app-side-rails />
 
   <main #content id="content" class="gui__main" tabindex="-1">
-    <!-- Hero goes here (4.5) -->
     <section class="gui__section gui__section--hero" aria-label="Introduction">
-      <p class="gui__placeholder">Hero — task 4.5</p>
+      <app-hero />
     </section>
 
     @for (section of sections; track section.fragment; let i = $index) {

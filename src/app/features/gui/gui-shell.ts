@@ -4,12 +4,13 @@ import { UiStore } from '../../core/state/ui.store';
 import { SectionTitle } from '../../shared/ui/section-title/section-title';
 import { Header } from './layout/header/header';
 import { SideRails } from './layout/side-rails/side-rails';
+import { Hero } from './sections/hero/hero';
 import { NAV_LINKS } from './nav-links';
 
-// TODO(step 4.5+): real section components.
+// TODO(step 4.6+): remaining section components.
 @Component({
   selector: 'app-gui-shell',
-  imports: [Header, SideRails, SectionTitle],
+  imports: [Header, SideRails, Hero, SectionTitle],
   templateUrl: './gui-shell.html',
   styleUrl: './gui-shell.scss',
 })

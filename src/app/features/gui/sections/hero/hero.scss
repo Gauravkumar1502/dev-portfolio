@@ -1,0 +1,47 @@
+:host {
+  display: grid;
+  gap: var(--space-4);
+  align-content: center;
+  max-width: 48rem;
+}
+
+.hero__greeting {
+  font-size: clamp(1.1rem, 1rem + 1vw, 1.75rem);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 1.5rem + 6vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text);
+  text-shadow: 4px 4px 0 var(--nb-shadow);
+}
+
+.hero__tagline {
+  font-size: clamp(1.25rem, 1rem + 2vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-muted);
+}
+
+.hero__intro {
+  max-width: 40rem;
+  margin-block-start: var(--space-2);
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.1rem);
+  color: var(--color-muted);
+}
+
+.hero__company {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-block-start: var(--space-6);
+}

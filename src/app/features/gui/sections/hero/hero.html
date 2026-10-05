@@ -1,0 +1,21 @@
+<p class="hero__greeting" appReveal>Hi, I’m</p>
+<h1 class="hero__name" appReveal [revealDelay]="100">{{ name() }}</h1>
+<p class="hero__tagline" appReveal [revealDelay]="200">{{ tagline() }}</p>
+
+@let text = intro();
+<p class="hero__intro" appReveal [revealDelay]="300">
+  {{ text.before }}<span class="hero__company">{{ text.company }}</span
+  >{{ text.after }}
+</p>
+
+<div class="hero__actions" appReveal [revealDelay]="400">
+  <a nb-button [href]="resumeUrl()" target="_blank" rel="noopener">
+    <app-icon name="external" [size]="16" />
+    Resume
+    <span class="sr-only">(PDF, opens in a new tab)</span>
+  </a>
+  <a nb-button variant="outline" [href]="mailto()">
+    <app-icon name="mail" [size]="16" />
+    Say hello
+  </a>
+</div>

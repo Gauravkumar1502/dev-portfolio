@@ -103,7 +103,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   socials row, email; closes on link click / Esc / backdrop; restores focus to menu button.
 - **Done when:** fully keyboard operable, body doesn't scroll behind, closes on navigation.
 
-### 4.5 Hero section
+### 4.5 Hero section ✅ DONE
 
 - **Files:** `sections/hero/hero.ts/.scss`
 - **Do:** "Hi, I'm" (primary) → name (`--font-display`, large clamp) → tagline (muted) → intro paragraph
