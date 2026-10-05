@@ -228,6 +228,12 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ### 6.1 SEO & meta ✅ DONE (pending assets: favicon.svg, apple-touch-icon.png, og-image.png)
 
+- [ ] **Assets from Gaurav** (then wire them up; see `TODO(6.1)` comments in `src/index.html`):
+  - [ ] `public/favicon.svg` — square GK logo (keep `favicon.ico` as fallback)
+  - [ ] `public/apple-touch-icon.png` — 180×180
+  - [ ] `public/og-image.png` — 1200×630 link-preview card → add `og:image` + `twitter:image`, switch card to `summary_large_image`
+  - [ ] _(optional)_ `public/images/profile.webp` — ~800×800 square → set `photo` in `profile.data.ts`
+
 - **Do:** per-route title (already) + description via `Meta`; Open Graph tags; custom favicon (GK).
 
 ### 6.2 Accessibility pass ✅ DONE (contrast via `pnpm check:contrast`; manual axe run still to do in a browser)

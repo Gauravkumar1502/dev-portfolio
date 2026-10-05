@@ -27,6 +27,7 @@ export interface Project {
 
 export interface SkillGroup {
   label: string;
+  icon: IconName;
   items: string[];
 }
 

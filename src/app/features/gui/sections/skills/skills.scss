@@ -1,3 +1,5 @@
+@use 'mixins' as nb;
+
 .skills {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
@@ -18,13 +20,26 @@
 }
 
 .skills__label {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
   font-size: 1rem;
   color: var(--color-primary);
+}
 
-  &::before {
-    color: var(--color-muted);
-    content: '// ';
-  }
+// small neobrutal badge holding the group icon
+.skills__icon {
+  @include nb.border;
+
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+
+.skills__text::before {
+  color: var(--color-muted);
+  content: '// ';
 }
 
 .skills__items {

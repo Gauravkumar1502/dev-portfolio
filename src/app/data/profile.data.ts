@@ -136,14 +136,19 @@ export const PROFILE: Profile = {
     },
   ],
   skills: [
-    { label: 'Languages', items: ['Java', 'C', 'JavaScript', 'HTML/CSS'] },
-    { label: 'Frameworks', items: ['Spring Boot', 'Spring AI', 'Angular 17+'] },
+    { label: 'Languages', icon: 'code', items: ['Java', 'C', 'JavaScript', 'HTML/CSS'] },
+    { label: 'Frameworks', icon: 'layers', items: ['Spring Boot', 'Spring AI', 'Angular 17+'] },
     {
       label: 'AI/ML',
+      icon: 'robot',
       items: ['RAG pipelines', 'Vector similarity search', 'LLM-based agents', 'MCP'],
     },
-    { label: 'Database', items: ['MySQL', 'PostgreSQL', 'PL/SQL', 'Redis'] },
-    { label: 'Tools', items: ['REST', 'GraphQL', 'Linux', 'Git', 'Docker', 'AWS', 'ActiveMQ'] },
+    { label: 'Database', icon: 'database', items: ['MySQL', 'PostgreSQL', 'PL/SQL', 'Redis'] },
+    {
+      label: 'Tools',
+      icon: 'toolbox',
+      items: ['REST', 'GraphQL', 'Linux', 'Git', 'Docker', 'AWS', 'ActiveMQ'],
+    },
   ],
   education: [
     {

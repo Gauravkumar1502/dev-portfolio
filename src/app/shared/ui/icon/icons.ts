@@ -11,11 +11,15 @@ import {
   faArrowUpRightFromSquare,
   faBars,
   faCode,
+  faDatabase,
   faDownload,
   faEnvelope,
+  faLayerGroup,
   faMoon,
+  faRobot,
   faSun,
   faTerminal,
+  faToolbox,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -47,6 +51,11 @@ export const ICONS = {
   download: faDownload,
   mail: faEnvelope,
   code: faCode,
+  // skill groups
+  layers: faLayerGroup,
+  robot: faRobot,
+  database: faDatabase,
+  toolbox: faToolbox,
 } as const satisfies Record<string, IconDefinition | AssetIcon>;
 
 export type IconName = keyof typeof ICONS;
