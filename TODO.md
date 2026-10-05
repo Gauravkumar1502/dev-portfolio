@@ -135,18 +135,30 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 ## 5. Terminal (`features/terminal`)
 
-### 5.1 TerminalStore + parser
-- **Files:** `terminal.store.ts`, `command-parser.ts`
-- **Do:** store (provided in `Terminal` component): `entries`, `history` (newest first), `pointer`,
-  `input`, `hints` signals; `submit()`, `clear()`, `prev()/next()`. Parser: trim, split on whitespace,
-  lowercase command name, keep quoted strings for `echo`.
-- **Done when:** unit behaviour checked manually via the prompt.
+### 5.1 TerminalStore + parser (data-only entries)
+- **Files:** `terminal.store.ts`, `command-parser.ts`, `models/terminal.model.ts`
+- **Pattern:** state holds **plain data only**, never component classes (Angular Discord advice:
+  "list of data, template decides"). Rendering resolves the component from the registry.
+- **Do:**
+  - Change `TermEntry` to `{ id: number; input: string; name: string; args: string[]; error?: string }`
+    (JSON-serializable); drop `output` / `TermOutput` from state.
+  - Store (provided in `Terminal` component, `providers: [TerminalStore]`): signals `entries`,
+    `history` (newest first, kept separate so `clear` doesn't wipe it), `pointer`, `input`, `hints`.
+  - Methods: `submit(raw)` (parse → run side effects → push entry), `clear()` = `entries.set([])`,
+    `prev()/next()` history navigation, `nextId` counter for stable `track`.
+  - Parser: trim, split on whitespace, lowercase command name, keep quoted strings for `echo`.
+- **Done when:** entries are plain objects (`JSON.stringify` works); `clear` empties output but ↑ still recalls history.
 
 ### 5.2 Command registry + context
 - **Files:** `command-registry.ts`, `commands/*.ts` (one file per command or small groups)
-- **Do:** `COMMANDS: Command[]` (from `models/terminal.model.ts`); `CommandContext` built in the store
-  (router, ThemeStore, ProfileStore, `window.open`). Lookup map by name; unknown → error output.
-- **Done when:** adding a command = adding one object.
+- **Do:**
+  - `Command { name; description; usage?; output?: Type<unknown>; complete?(args); run?(ctx): string | void }`
+    — `output` = component rendered for the entry (component reads `ProfileStore` itself, receives `args` input);
+    `run` = side effects only (navigate, set theme, open URL, clear); returning a string = error/usage message.
+  - Registry: `COMMANDS` array + `Map` by name; `outputFor(entry): Type<unknown> | null`
+    (unknown name / error → `ErrorOutput`).
+  - `CommandContext` built in the store (Router, ThemeStore, `window.open`, `clear`, `history`).
+- **Done when:** adding a command = one object (+ one output component); no `Type` stored in signals.
 
 ### 5.3 Prompt
 - **Files:** `prompt/prompt.ts/.scss`
@@ -158,12 +170,14 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 ### 5.4 Terminal screen + welcome
 - **Files:** `terminal.ts/.scss`, `outputs/welcome.ts`
 - **Do:** version line, ASCII name art + monitor art (from old `cli.component.html`), "type `help`" hint;
-  render `entries` with echoed prompt + `NgComponentOutlet` output; auto-scroll to bottom.
+  render with `@for (e of store.entries(); track e.id)` → echoed prompt +
+  `<ng-container *ngComponentOutlet="registry.outputFor(e); inputs: { args: e.args }" />`; auto-scroll to bottom.
 - **Done when:** `welcome` shows on load and on command.
 
 ### 5.5 Info commands
 - **Files:** `outputs/{help,about,experience,projects,skills,education,certifications}.ts`
-- **Do:** `help` (aligned table + shortcuts), `about`, `whoami`, `experience`, `projects` (+ `projects go <n>`),
+- **Do:** each output component has `args = input<string[]>([])` and injects `ProfileStore`.
+  `help` (aligned table + shortcuts), `about`, `whoami`, `experience`, `projects` (+ `projects go <n>`),
   `skills`, `education`, `certifications` — all reading `ProfileStore`.
 - **Done when:** every command prints formatted output; `projects go 1` opens link.
 
