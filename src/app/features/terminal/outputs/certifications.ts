@@ -8,9 +8,8 @@ import { ProfileStore } from '../../../core/state/profile.store';
       @for (cert of certifications(); track cert.title) {
         <li>
           <span class="t-key">{{ cert.title }}</span>
-          @if (cert.detail) {
-            — {{ cert.detail }}
-          }
+          <!-- explicit separator: whitespace at the start of an @if block is collapsed -->
+          <span>{{ cert.detail ? ' — ' + cert.detail + ' ' : ' ' }}</span>
           @if (cert.url; as url) {
             <a class="t-link" [href]="url" target="_blank" rel="noopener noreferrer"
               >[certificate]</a
