@@ -1,24 +1,109 @@
-@use "sass:list";
+@use 'sass:list';
 
 // --term-bg / --term-text / --term-primary (prompt, keywords) / --term-accent (caret, highlights)
 $themes: (
-  'dark-forest': (hsl(220 13% 18%), hsl(218 13% 88%), hsl(27 100% 42%), hsl(39 100% 71%)),
-  'dark-day': (hsl(20 10% 12%), hsl(35 40% 54%), hsl(150 31% 46%), hsl(150 36% 54%)),
-  'dark-ocean': (hsl(194 100% 4%), hsl(218 13% 88%), hsl(143 100% 33%), hsl(79 80% 51%)),
-  'dark-space': (hsl(252 7% 12%), hsl(218 13% 88%), hsl(199 100% 59%), hsl(185 100% 64%)),
-  'dark-night': (hsl(240 14% 9%), hsl(218 13% 88%), hsl(45 100% 50%), hsl(234 100% 72%)),
-  'dark-cave': (hsl(0 0% 0%), hsl(218 13% 88%), hsl(82 100% 37%), hsl(146 60% 56%)),
-  'dark-sea': (hsl(0 0% 10%), hsl(0 0% 90%), hsl(120 100% 60%), hsl(210 100% 60%)),
-  'light-vanilla': (hsl(190 18% 87%), hsl(198 13% 15%), hsl(357 77% 56%), hsl(357 100% 71%)),
-  'light-haze': (hsl(59 99% 94%), hsl(0 0% 10%), hsl(0 0% 40%), hsl(120 60% 35%)),
-  'light-day': (hsl(30 60% 95%), hsl(198 13% 15%), hsl(357 77% 56%), hsl(357 100% 71%)),
-  'light-sky': (hsl(200 50% 90%), hsl(0 0% 10%), hsl(200 50% 40%), hsl(240 100% 70%)),
-  'dark': (#1d2a35, #cbd5e1, #05ce91, #ff9d00),
-  'light': (#eff3f3, #334155, #027474, #ff9d00),
-  'blue-matrix': (#101116, #ffffff, #00ff9c, #60fdff),
-  'espresso': (#323232, #f7f7f7, #e1e48b, #a5c260),
-  'green-goblin': (#000000, #ffffff, #e5e500, #04a500),
-  'ubuntu': (#2d0922, #ffffff, #80d932, #80d932),
+  'dark-forest': (
+    hsl(220deg 13% 18%),
+    hsl(218deg 13% 88%),
+    hsl(27deg 100% 42%),
+    hsl(39deg 100% 71%),
+  ),
+  'dark-day': (
+    hsl(20deg 10% 12%),
+    hsl(35deg 40% 54%),
+    hsl(150deg 31% 46%),
+    hsl(150deg 36% 54%),
+  ),
+  'dark-ocean': (
+    hsl(194deg 100% 4%),
+    hsl(218deg 13% 88%),
+    hsl(143deg 100% 33%),
+    hsl(79deg 80% 51%),
+  ),
+  'dark-space': (
+    hsl(252deg 7% 12%),
+    hsl(218deg 13% 88%),
+    hsl(199deg 100% 59%),
+    hsl(185deg 100% 64%),
+  ),
+  'dark-night': (
+    hsl(240deg 14% 9%),
+    hsl(218deg 13% 88%),
+    hsl(45deg 100% 50%),
+    hsl(234deg 100% 72%),
+  ),
+  'dark-cave': (
+    hsl(0deg 0% 0%),
+    hsl(218deg 13% 88%),
+    hsl(82deg 100% 37%),
+    hsl(146deg 60% 56%),
+  ),
+  'dark-sea': (
+    hsl(0deg 0% 10%),
+    hsl(0deg 0% 90%),
+    hsl(120deg 100% 60%),
+    hsl(210deg 100% 60%),
+  ),
+  'light-vanilla': (
+    hsl(190deg 18% 87%),
+    hsl(198deg 13% 15%),
+    hsl(357deg 77% 56%),
+    hsl(357deg 100% 71%),
+  ),
+  'light-haze': (
+    hsl(59deg 99% 94%),
+    hsl(0deg 0% 10%),
+    hsl(0deg 0% 40%),
+    hsl(120deg 60% 35%),
+  ),
+  'light-day': (
+    hsl(30deg 60% 95%),
+    hsl(198deg 13% 15%),
+    hsl(357deg 77% 56%),
+    hsl(357deg 100% 71%),
+  ),
+  'light-sky': (
+    hsl(200deg 50% 90%),
+    hsl(0deg 0% 10%),
+    hsl(200deg 50% 40%),
+    hsl(240deg 100% 70%),
+  ),
+  'dark': (
+    #1d2a35,
+    #cbd5e1,
+    #05ce91,
+    #ff9d00,
+  ),
+  'light': (
+    #eff3f3,
+    #334155,
+    #027474,
+    #ff9d00,
+  ),
+  'blue-matrix': (
+    #101116,
+    #fff,
+    #00ff9c,
+    #60fdff,
+  ),
+  'espresso': (
+    #323232,
+    #f7f7f7,
+    #e1e48b,
+    #a5c260,
+  ),
+  'green-goblin': (
+    #000,
+    #fff,
+    #e5e500,
+    #04a500,
+  ),
+  'ubuntu': (
+    #2d0922,
+    #fff,
+    #80d932,
+    #80d932,
+  ),
 );
 
 @each $name, $c in $themes {

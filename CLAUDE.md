@@ -68,3 +68,34 @@ Unified portfolio: neobrutalism GUI (`/`) + terminal (`/terminal`) in one Angula
 - Content: edit `src/app/data/profile.data.ts`; read it via `ProfileStore`, never import the data file in components.
 - Global state lives in `core/state/*` signal stores; terminal session state stays in a component-provided `TerminalStore`.
 - Layout: `core/` (stores, services, guards), `data/`, `models/`, `shared/ui` (`nb-*` primitives), `features/gui`, `features/terminal`.
+
+## Code Style & Editing Rules
+
+Run `pnpm check` (prettier + eslint + stylelint + build) before finishing any task; it must pass with no warnings.
+Auto-fix: `pnpm format`, `pnpm lint:fix`, `pnpm lint:styles:fix`.
+
+**General** — `.editorconfig`: 2 spaces, LF, UTF-8, final newline. Prettier: width 100, single quotes, Angular HTML parser.
+
+**TypeScript**
+
+- `import type` / inline `type` for type-only imports (enforced).
+- No `public` keyword; mark template-only members `protected`, internals `private`, injected deps `private readonly`.
+- No `any`, `===` only, no `console.log` (warn/error allowed).
+- Files: 2025 style guide names (`hero.ts`, `theme.store.ts`), one component/service per file.
+- Selectors: `app-*` components, `nb-*` / `[nbX]` for shared neobrutal primitives (enforced).
+- Never import `CommonModule`, `NgClass`, `NgStyle`, Angular Material, or `data/profile.data` outside `ProfileStore` (enforced).
+
+**HTML templates**
+
+- Native control flow only; self-closing tags for empty components; `ngSrc` for images; `type` on every `<button>` (enforced).
+- No inline `style="…"` attributes; use `[style.x]` bindings or classes (enforced).
+- Accessibility rules from `templateAccessibility` are errors: labels, alt text, keyboard handlers with click handlers.
+
+**SCSS** (`.stylelintrc.json`, standard-scss + recess property order)
+
+- Colors only via theme variables (`var(--color-*)`, `var(--nb-*)`, `var(--term-*)`); raw hex/rgb/hsl and named colors are allowed **only** in `src/styles/themes/*` and `_tokens.scss` (enforced).
+- Spacing/borders/shadows via tokens (`var(--space-*)`, `nb.*` mixins); prefer `rem`, `clamp()` for fluid type.
+- Class names: kebab-case BEM (`block__element--modifier`); no ID selectors; nesting ≤ 3; ≤ 4 compound selectors (enforced).
+- No `::ng-deep`; style children through inputs/CSS variables. `!important` only in global reduced-motion styles.
+- Load modules with `@use` (never `@import`), use `sass:` modules (`list.nth`, `math.div`) instead of global functions (enforced).
+- Keep component styles under the 4 kB budget; shared patterns go into `_mixins.scss`.

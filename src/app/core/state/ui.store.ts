@@ -3,7 +3,7 @@ import { effect, inject, Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { StorageService } from '../services/storage.service';
-import { AppMode } from '../../models/theme.model';
+import { type AppMode } from '../../models/theme.model';
 
 const MODE_KEY = 'portfolio:mode';
 
@@ -16,7 +16,9 @@ export class UiStore {
   readonly mode = signal<AppMode>(this.storedMode ?? 'gui');
   readonly mobileMenuOpen = signal(false);
   readonly isDesktop = toSignal(
-    inject(BreakpointObserver).observe('(min-width: 1024px)').pipe(map((s) => s.matches)),
+    inject(BreakpointObserver)
+      .observe('(min-width: 1024px)')
+      .pipe(map((s) => s.matches)),
     { initialValue: false },
   );
 

@@ -12,21 +12,25 @@
 @mixin surface {
   @include border;
   @include shadow;
-  background: var(--nb-surface);
+
   color: var(--nb-on-surface);
+  background: var(--nb-surface);
 }
 
 @mixin pressable {
-  transition: transform 120ms ease, box-shadow 120ms ease;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
 
   &:hover {
     transform: translate(-2px, -2px);
+
     @include shadow(calc(var(--nb-shadow-x) + 2px), calc(var(--nb-shadow-y) + 2px));
   }
 
   &:active {
-    transform: translate(var(--nb-shadow-x), var(--nb-shadow-y));
     box-shadow: none;
+    transform: translate(var(--nb-shadow-x), var(--nb-shadow-y));
   }
 }
 

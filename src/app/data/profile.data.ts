@@ -1,4 +1,4 @@
-import { Profile } from '../models/profile.model';
+import { type Profile } from '../models/profile.model';
 
 // TODO(step 2): fill remaining content (about text, more projects, LeetCode URL).
 export const PROFILE: Profile = {
@@ -11,9 +11,19 @@ export const PROFILE: Profile = {
   resumeUrl: 'resume/GK_Resume.pdf',
   socials: [
     { id: 'github', label: 'GitHub', url: 'https://github.com/Gauravkumar1502', icon: 'github' },
-    { id: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/gauravkumar15', icon: 'linkedin' },
+    {
+      id: 'linkedin',
+      label: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/gauravkumar15',
+      icon: 'linkedin',
+    },
     { id: 'x', label: 'X / Twitter', url: 'https://x.com/Gauravkuma_r', icon: 'x' },
-    { id: 'hackerrank', label: 'HackerRank', url: 'https://www.hackerrank.com/profile/gauravkumar15021', icon: 'hackerrank' },
+    {
+      id: 'hackerrank',
+      label: 'HackerRank',
+      url: 'https://www.hackerrank.com/profile/gauravkumar15021',
+      icon: 'hackerrank',
+    },
     { id: 'codepen', label: 'CodePen', url: 'https://codepen.io/gauravkumar1502', icon: 'codepen' },
   ],
   experience: [
@@ -66,7 +76,10 @@ export const PROFILE: Profile = {
   skills: [
     { label: 'Languages', items: ['Java', 'C', 'JavaScript', 'HTML/CSS'] },
     { label: 'Frameworks', items: ['Spring Boot', 'Spring AI', 'Angular 17+'] },
-    { label: 'AI/ML', items: ['RAG pipelines', 'Vector similarity search', 'LLM-based agents', 'MCP'] },
+    {
+      label: 'AI/ML',
+      items: ['RAG pipelines', 'Vector similarity search', 'LLM-based agents', 'MCP'],
+    },
     { label: 'Database', items: ['MySQL', 'PostgreSQL', 'PL/SQL', 'Redis'] },
     { label: 'Tools', items: ['REST', 'GraphQL', 'Linux', 'Git', 'Docker', 'AWS', 'ActiveMQ'] },
   ],

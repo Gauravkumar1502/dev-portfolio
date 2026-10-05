@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { StorageService } from '../services/storage.service';
-import { GuiTheme, TERMINAL_THEMES, TerminalTheme } from '../../models/theme.model';
+import { type GuiTheme, TERMINAL_THEMES, type TerminalTheme } from '../../models/theme.model';
 import { UiStore } from './ui.store';
 
 const GUI_KEY = 'portfolio:gui-theme';
@@ -13,8 +13,12 @@ export class ThemeStore {
   private readonly ui = inject(UiStore);
   private readonly document = inject(DOCUMENT);
 
-  readonly guiTheme = signal<GuiTheme>(this.storage.get<GuiTheme>(GUI_KEY) ?? this.preferredGuiTheme());
-  readonly terminalTheme = signal<TerminalTheme>(this.storage.get<TerminalTheme>(TERM_KEY) ?? 'dark-forest');
+  readonly guiTheme = signal<GuiTheme>(
+    this.storage.get<GuiTheme>(GUI_KEY) ?? this.preferredGuiTheme(),
+  );
+  readonly terminalTheme = signal<TerminalTheme>(
+    this.storage.get<TerminalTheme>(TERM_KEY) ?? 'dark-forest',
+  );
   readonly activeTheme = computed(() =>
     this.ui.mode() === 'gui' ? this.guiTheme() : `term-${this.terminalTheme()}`,
   );
@@ -38,7 +42,8 @@ export class ThemeStore {
   }
 
   private preferredGuiTheme(): GuiTheme {
-    const dark = this.document.defaultView?.matchMedia('(prefers-color-scheme: dark)').matches ?? true;
+    const dark =
+      this.document.defaultView?.matchMedia('(prefers-color-scheme: dark)').matches ?? true;
     return dark ? 'gui-dark' : 'gui-light';
   }
 }

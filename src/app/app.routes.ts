@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { type Routes } from '@angular/router';
 import { lastModeGuard } from './core/guards/last-mode.guard';
 
 export const routes: Routes = [

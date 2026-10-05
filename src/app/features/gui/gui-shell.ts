@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ThemeStore } from '../../core/state/theme.store';
 import { UiStore } from '../../core/state/ui.store';
