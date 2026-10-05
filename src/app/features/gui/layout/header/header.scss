@@ -74,7 +74,9 @@
   align-items: center;
 }
 
+.header__theme,
 .header__terminal {
+  // small screens: both live inside the mobile menu
   @include nb.below-desktop {
     display: none;
   }

@@ -27,6 +27,19 @@ a {
   color: var(--color-primary);
 }
 
+// Visually hidden but available to screen readers.
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}
+
 // CDK Dialog drawer (features/gui/layout/mobile-menu): let the content fill the panel.
 .mobile-menu-panel .cdk-dialog-container {
   height: 100%;

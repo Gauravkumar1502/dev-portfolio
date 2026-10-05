@@ -1,6 +1,6 @@
 <div class="mobile-menu">
   <div class="mobile-menu__top">
-    <h2 id="mobile-menu-title" class="mobile-menu__title">menu</h2>
+    <h2 id="mobile-menu-title" class="sr-only">Menu</h2>
     <button
       type="button"
       nb-button
@@ -17,31 +17,46 @@
     <ol class="mobile-menu__links">
       @for (link of links; track link.fragment) {
         <li>
-          <a
-            class="mobile-menu__link"
-            routerLink="/"
-            [fragment]="link.fragment"
-            (click)="close()"
-            >{{ link.label }}</a
-          >
+          <a class="mobile-menu__fn" routerLink="/" [fragment]="link.fragment" (click)="close()">{{
+            link.label
+          }}</a>
         </li>
       }
+      <li>
+        <a
+          class="mobile-menu__fn"
+          routerLink="/terminal"
+          aria-label="Open terminal portfolio"
+          (click)="close()"
+        >
+          .open(<span class="mobile-menu__arg">'terminal'</span>)
+        </a>
+      </li>
     </ol>
   </nav>
 
-  <div class="mobile-menu__actions">
-    <button type="button" nb-button variant="outline" (click)="theme.toggleGuiTheme()">
-      <app-icon [name]="theme.isGuiDark() ? 'sun' : 'moon'" [size]="18" />
-      {{ theme.isGuiDark() ? 'light theme' : 'dark theme' }}
-    </button>
-    <a nb-button routerLink="/terminal" (click)="close()">
-      <app-icon name="terminal" [size]="16" />
-      terminal
-    </a>
-  </div>
+  <div class="mobile-menu__bottom">
+    <div class="mobile-menu__connect">
+      <span class="mobile-menu__fn-name" aria-hidden="true">.connect(</span>
+      <app-social-links [iconSize]="20" />
+      <span class="mobile-menu__fn-name" aria-hidden="true">)</span>
+    </div>
 
-  <div class="mobile-menu__contact">
-    <app-social-links />
-    <a class="mobile-menu__email" [href]="mailto()">{{ email() }}</a>
+    <a class="mobile-menu__fn mobile-menu__fn--small" [href]="mailto()">
+      .mailTo(<span class="mobile-menu__arg">'{{ email() }}'</span>)
+    </a>
+
+    <button
+      type="button"
+      class="mobile-menu__fn mobile-menu__switch"
+      [attr.aria-label]="theme.isGuiDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+      (click)="theme.toggleGuiTheme()"
+    >
+      .switchTo(<app-icon
+        class="mobile-menu__arg"
+        [name]="theme.isGuiDark() ? 'sun' : 'moon'"
+        [size]="18"
+      />)
+    </button>
   </div>
 </div>
