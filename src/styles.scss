@@ -27,6 +27,11 @@ a {
   color: var(--color-primary);
 }
 
+// CDK Dialog drawer (features/gui/layout/mobile-menu): let the content fill the panel.
+.mobile-menu-panel .cdk-dialog-container {
+  height: 100%;
+}
+
 // Used by the `appReveal` directive (shared/directives/reveal-on-scroll.ts).
 .reveal {
   opacity: 0;

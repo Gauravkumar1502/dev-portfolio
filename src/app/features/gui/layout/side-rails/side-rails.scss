@@ -1,0 +1,66 @@
+@use 'mixins' as nb;
+
+:host {
+  display: contents;
+}
+
+.rail {
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  width: var(--rail-width);
+
+  // vertical line down to the viewport edge
+  &::after {
+    width: 2px;
+    height: 7rem;
+    content: '';
+    background: var(--color-text);
+  }
+
+  @include nb.below-desktop {
+    display: none;
+  }
+}
+
+.rail--left {
+  left: var(--space-4);
+}
+
+.rail--right {
+  right: var(--space-4);
+}
+
+.rail__email {
+  @include nb.focus-ring;
+
+  font-size: 0.875rem;
+  color: var(--color-text);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  writing-mode: vertical-rl;
+  transition:
+    color 150ms ease,
+    translate 150ms ease;
+
+  &:hover {
+    color: var(--color-primary);
+    translate: 0 -3px;
+  }
+}
+
+.rail__terminal {
+  @include nb.focus-ring;
+
+  display: inline-flex;
+  padding: var(--space-1);
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-text);
+  }
+}

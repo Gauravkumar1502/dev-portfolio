@@ -1,0 +1,47 @@
+<div class="mobile-menu">
+  <div class="mobile-menu__top">
+    <h2 id="mobile-menu-title" class="mobile-menu__title">menu</h2>
+    <button
+      type="button"
+      nb-button
+      variant="outline"
+      size="sm"
+      aria-label="Close menu"
+      (click)="close()"
+    >
+      <app-icon name="close" [size]="18" />
+    </button>
+  </div>
+
+  <nav aria-label="Mobile">
+    <ol class="mobile-menu__links">
+      @for (link of links; track link.fragment) {
+        <li>
+          <a
+            class="mobile-menu__link"
+            routerLink="/"
+            [fragment]="link.fragment"
+            (click)="close()"
+            >{{ link.label }}</a
+          >
+        </li>
+      }
+    </ol>
+  </nav>
+
+  <div class="mobile-menu__actions">
+    <button type="button" nb-button variant="outline" (click)="theme.toggleGuiTheme()">
+      <app-icon [name]="theme.isGuiDark() ? 'sun' : 'moon'" [size]="18" />
+      {{ theme.isGuiDark() ? 'light theme' : 'dark theme' }}
+    </button>
+    <a nb-button routerLink="/terminal" (click)="close()">
+      <app-icon name="terminal" [size]="16" />
+      terminal
+    </a>
+  </div>
+
+  <div class="mobile-menu__contact">
+    <app-social-links />
+    <a class="mobile-menu__email" [href]="mailto()">{{ email() }}</a>
+  </div>
+</div>

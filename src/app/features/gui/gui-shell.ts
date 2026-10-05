@@ -3,12 +3,13 @@ import { Component, DestroyRef, ElementRef, inject, type OnInit, viewChild } fro
 import { UiStore } from '../../core/state/ui.store';
 import { SectionTitle } from '../../shared/ui/section-title/section-title';
 import { Header } from './layout/header/header';
+import { SideRails } from './layout/side-rails/side-rails';
 import { NAV_LINKS } from './nav-links';
 
-// TODO(step 4.3+): side rails, mobile menu and real section components.
+// TODO(step 4.5+): real section components.
 @Component({
   selector: 'app-gui-shell',
-  imports: [Header, SectionTitle],
+  imports: [Header, SideRails, SectionTitle],
   templateUrl: './gui-shell.html',
   styleUrl: './gui-shell.scss',
 })

@@ -89,17 +89,17 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   below 1024px show only logo + menu button (`UiStore.mobileMenuOpen`).
 - **Done when:** links scroll to sections, toggle persists across reload, terminal button routes.
 
-### 4.3 Side rails (≥1024px)
+### 4.3 Side rails (≥1024px) ✅ DONE
 
 - **Files:** `layout/side-rails/side-rails.ts/.scss`
 - **Do:** left: vertical `writing-mode: vertical-rl` mailto email + line to bottom; right: socials icon column
   - line; `position: fixed`; render only when `UiStore.isDesktop()`. Tooltips via `title`/aria-label.
 - **Done when:** matches screenshot layout; hidden below 1024px.
 
-### 4.4 Mobile menu
+### 4.4 Mobile menu ✅ DONE (CDK Dialog, lazy-loaded)
 
 - **Files:** `layout/mobile-menu/mobile-menu.ts/.scss`
-- **Do:** CDK `Overlay` (or `cdkTrapFocus` panel) sliding from right; nav links, theme toggle, terminal button,
+- **Do:** CDK `Dialog` drawer sliding from right; nav links, theme toggle, terminal button,
   socials row, email; closes on link click / Esc / backdrop; restores focus to menu button.
 - **Done when:** fully keyboard operable, body doesn't scroll behind, closes on navigation.
 
