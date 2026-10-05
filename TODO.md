@@ -55,14 +55,14 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   `size = input<'sm'|'md'>('md')`; host class bindings; `nb.surface` + `nb.pressable` + `nb.focus-ring`.
 - **Done when:** works as `<a>` and `<button>`, keyboard focus visible, hover lift / active press.
 
-### 3.3 `nb-card`, `nb-tag`, `section-title`
+### 3.3 `nb-card`, `nb-tag`, `section-title` ✅ DONE
 
 - **Files:** `shared/ui/card/nb-card.ts`, `shared/ui/tag/nb-tag.ts`, `shared/ui/section-title/section-title.ts`
 - **Do:** card = content projection + `interactive` input (adds pressable); tag = small bordered chip;
   section-title = `index` + `label` inputs → renders `01. .experience()` style heading with rule line.
 - **Done when:** all three used in a scratch view and look right in dark/light.
 
-### 3.4 `reveal-on-scroll` directive
+### 3.4 `reveal-on-scroll` directive ✅ DONE
 
 - **Files:** `shared/directives/reveal-on-scroll.ts`
 - **Do:** `[appReveal]`; IntersectionObserver via `afterNextRender`, toggles `is-visible` host class;

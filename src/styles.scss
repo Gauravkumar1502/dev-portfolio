@@ -27,6 +27,20 @@ a {
   color: var(--color-primary);
 }
 
+// Used by the `appReveal` directive (shared/directives/reveal-on-scroll.ts).
+.reveal {
+  opacity: 0;
+  translate: 0 1.5rem;
+  transition:
+    opacity 500ms ease,
+    translate 500ms ease;
+}
+
+.reveal--visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
