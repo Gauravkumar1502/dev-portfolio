@@ -37,11 +37,19 @@
           @case ('projects') {
             <app-projects />
           }
-          @default {
-            <p class="gui__placeholder">Coming in step 4.</p>
+          @case ('skills') {
+            <app-skills />
+          }
+          @case ('education') {
+            <app-education />
+          }
+          @case ('contact') {
+            <app-contact />
           }
         }
       </section>
     }
   </main>
+
+  <app-footer />
 </div>

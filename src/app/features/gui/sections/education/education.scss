@@ -1,0 +1,84 @@
+@use 'mixins' as nb;
+
+.timeline {
+  display: grid;
+  gap: var(--space-6);
+  padding: 0 0 0 var(--space-6);
+  margin-block-end: var(--space-8);
+  list-style: none;
+  border-inline-start: var(--nb-border-width) solid var(--color-muted);
+}
+
+.timeline__item {
+  position: relative;
+
+  // node on the timeline line
+  &::before {
+    position: absolute;
+    top: var(--space-6);
+    left: calc(-1 * var(--space-6) - var(--nb-border-width) / 2 - 0.5rem);
+    width: 1rem;
+    height: 1rem;
+    content: '';
+    background: var(--color-primary);
+    border: 2px solid var(--nb-shadow);
+  }
+}
+
+.timeline__dates {
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}
+
+.timeline__degree {
+  margin-block: var(--space-1);
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.timeline__school,
+.timeline__score {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.certs__title {
+  margin-block-end: var(--space-4);
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
+.certs {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0;
+  color: var(--color-muted);
+  list-style: none;
+}
+
+.certs__item {
+  &::before {
+    margin-inline-end: var(--space-2);
+    color: var(--color-primary);
+    content: '▹';
+  }
+}
+
+.certs__name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.certs__detail {
+  margin-inline-start: var(--space-1);
+}
+
+.certs__link {
+  @include nb.focus-ring;
+
+  display: inline-flex;
+  gap: var(--space-1);
+  align-items: center;
+  margin-inline-start: var(--space-2);
+  font-size: 0.85rem;
+}

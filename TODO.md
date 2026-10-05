@@ -130,19 +130,19 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - **Do:** responsive grid of interactive nb-cards: name, description, `nb-tag` stack, repo/live icon links.
 - **Done when:** 1/2/3 columns at mobile/tablet/desktop.
 
-### 4.9 Skills section
+### 4.9 Skills section ✅ DONE
 
 - **Files:** `sections/skills/skills.ts/.scss`
 - **Do:** one nb-card per `SkillGroup` with `nb-tag` chips.
 - **Done when:** wraps nicely, consistent heights in a row.
 
-### 4.10 Education + Certifications
+### 4.10 Education + Certifications ✅ DONE
 
 - **Files:** `sections/education/education.ts/.scss`
 - **Do:** timeline-style nb-cards (degree, school, dates, score); certifications list with optional link.
 - **Done when:** both entries + certifications shown.
 
-### 4.11 Contact + footer
+### 4.11 Contact + footer ✅ DONE
 
 - **Files:** `sections/contact/contact.ts/.scss`, `layout/footer/footer.ts`
 - **Do:** big centered nb-card "Get in touch" + mailto nbButton; footer with socials (mobile), credits,

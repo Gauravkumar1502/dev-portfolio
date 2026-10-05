@@ -1,0 +1,35 @@
+<ol class="timeline">
+  @for (entry of education(); track entry.school; let i = $index) {
+    <li class="timeline__item" appReveal [revealDelay]="i * 100">
+      <nb-card compact>
+        <p class="timeline__dates">{{ entry.start }} – {{ entry.end }}</p>
+        <h3 class="timeline__degree">{{ entry.degree }}</h3>
+        <p class="timeline__school">{{ entry.school }} · {{ entry.location }}</p>
+        <p class="timeline__score">{{ entry.score }}</p>
+      </nb-card>
+    </li>
+  }
+</ol>
+
+<h3 class="certs__title" appReveal>Certifications &amp; achievements</h3>
+<ul class="certs" appReveal [revealDelay]="100">
+  @for (cert of certifications(); track cert.title) {
+    <li class="certs__item">
+      <span class="certs__name">{{ cert.title }}</span>
+      @if (cert.detail) {
+        <span class="certs__detail">— {{ cert.detail }}</span>
+      }
+      @if (cert.url; as url) {
+        <a
+          class="certs__link"
+          [href]="url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="cert.title + ' certificate (opens in a new tab)'"
+        >
+          certificate <app-icon name="external" [size]="12" />
+        </a>
+      }
+    </li>
+  }
+</ul>
