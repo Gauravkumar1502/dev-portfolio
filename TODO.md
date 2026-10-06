@@ -281,12 +281,12 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
   → `actions/upload-pages-artifact` + `actions/deploy-pages`.
 - **Done when:** workflow green on push to `main`.
 
-### 7.2 Repo
+### 7.2 Repo ✅ DONE (live at https://gauravkumar1502.github.io/dev-portfolio/)
 
-- [ ] Create `dev-portfolio` repo on GitHub (public, no README) and `git remote add origin … && git push -u origin main`
-- [ ] Settings → Pages → Build and deployment → Source: **GitHub Actions** (one-time; nothing else needed —
+- [x] Create `dev-portfolio` repo on GitHub (public, no README) and `git remote add origin … && git push -u origin main`
+- [x] Settings → Pages → Build and deployment → Source: **GitHub Actions** (one-time; nothing else needed —
       the workflow uses the built-in `GITHUB_TOKEN`, no personal token/secret)
-- [ ] Check the Actions run is green and `/dev-portfolio/` + `/dev-portfolio/terminal` load
+- [x] Check the Actions run is green and `/dev-portfolio/` + `/dev-portfolio/terminal` load
 
 - **Do:** create `dev-portfolio` on GitHub, push, enable Pages (source: GitHub Actions);
   update `resumeUrl`/links; optionally redirect the old portfolio + Terminal-Portfolio to the new URL.
