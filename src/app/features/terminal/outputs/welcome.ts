@@ -7,8 +7,8 @@ import { MONITOR_ART, NAME_ART } from './welcome-art';
     <div class="t-output welcome">
       <p class="t-muted">Terminal Portfolio v2.0.0</p>
       <div class="welcome__art" aria-hidden="true">
-        <pre class="t-pre t-key welcome__name">{{ name }}</pre>
         <pre class="t-pre t-accent welcome__monitor">{{ monitor }}</pre>
+        <pre class="t-pre t-key welcome__name">{{ name }}</pre>
       </div>
       <p class="sr-only">Gaurav Kumar</p>
       <p>Welcome to my interactive web terminal.</p>
