@@ -15,7 +15,7 @@ import { NbTag } from '../../../../shared/ui/tag/nb-tag';
           <nb-card compact class="skills__card">
             <h3 class="skills__label">
               <app-icon class="skills__icon" [name]="group.icon" [size]="18" />
-              <span class="skills__text">{{ group.label }}</span>
+              <span>{{ group.label }}</span>
             </h3>
             <ul class="skills__items">
               @for (item of group.items; track item) {

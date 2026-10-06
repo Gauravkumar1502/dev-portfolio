@@ -140,7 +140,13 @@ export const PROFILE: Profile = {
     {
       label: 'AI/ML',
       icon: 'robot',
-      items: ['RAG pipelines', 'Vector similarity search', 'LLM-based agents', 'MCP'],
+      items: [
+        'RAG pipelines (Spring AI + Vespa)',
+        'Vector DB (Vespa, pgvector)',
+        'MCP servers & tools',
+        'Agent routing (Jev & Laya decision models)',
+        'LLM-based agents',
+      ],
     },
     { label: 'Database', icon: 'database', items: ['MySQL', 'PostgreSQL', 'PL/SQL', 'Redis'] },
     {

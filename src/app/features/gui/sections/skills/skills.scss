@@ -37,11 +37,6 @@
   background: var(--color-primary);
 }
 
-.skills__text::before {
-  color: var(--color-muted);
-  content: '// ';
-}
-
 .skills__items {
   display: flex;
   flex-wrap: wrap;
