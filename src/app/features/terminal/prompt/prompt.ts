@@ -14,7 +14,7 @@ import { TermInfo } from './term-info';
   selector: 'app-prompt',
   imports: [TermInfo],
   template: `
-    <form class="prompt" (submit)="$event.preventDefault(); store.submit()">
+    <form class="prompt" (submit)="$event.preventDefault(); onEnter()">
       <label class="prompt__label" for="terminal-input">
         <app-term-info />
         <span class="sr-only">Command</span>
@@ -41,13 +41,22 @@ import { TermInfo } from './term-info';
         />
       </div>
     </form>
-    <!-- Tab with several matches: options listed under the line being typed -->
+    <!-- fish-style completion menu: Tab / Shift+Tab cycle, Enter takes, Esc closes -->
     @if (store.hints().length) {
-      <p class="prompt__hints" aria-live="polite" aria-label="Completions">
-        @for (hint of store.hints(); track hint) {
-          <span>{{ hint }}</span>
+      <ul class="prompt__hints" aria-label="Completions" aria-live="polite">
+        @for (hint of store.hints(); track hint.value; let i = $index) {
+          <li
+            class="prompt__hint"
+            [class.prompt__hint--active]="i === store.hintIndex()"
+            [attr.aria-current]="i === store.hintIndex() ? 'true' : null"
+          >
+            <span>{{ hint.value }}</span>
+            @if (hint.description) {
+              <span class="prompt__hint-desc">({{ hint.description }})</span>
+            }
+          </li>
         }
-      </p>
+      </ul>
     }
   `,
   styleUrl: './prompt.scss',
@@ -80,7 +89,7 @@ export class Prompt {
   protected onInput(field: HTMLInputElement): void {
     this.store.input.set(field.value);
     // options belong to the previous text; typing hides them like a real shell
-    this.store.hints.set([]);
+    this.store.closeHints();
   }
 
   /** Mobile keyboards have no →, so tapping the faded text accepts it (keeps focus in the input). */
@@ -90,6 +99,10 @@ export class Prompt {
     this.focus();
   }
 
+  protected onEnter(): void {
+    if (!this.store.acceptHint()) this.store.submit();
+  }
+
   protected onKeydown(event: KeyboardEvent): void {
     const key = event.key.toLowerCase();
     const ctrl = event.ctrlKey || event.metaKey;
@@ -97,7 +110,7 @@ export class Prompt {
 
     if (key === 'tab' || (ctrl && key === 'i')) {
       event.preventDefault();
-      this.store.complete();
+      this.store.complete(event.shiftKey);
     } else if (
       (key === 'arrowright' || key === 'end') &&
       input.selectionStart === input.value.length &&
@@ -119,7 +132,7 @@ export class Prompt {
       event.preventDefault();
       this.store.cancel();
     } else if (key === 'escape') {
-      this.store.hints.set([]);
+      this.store.dismissHints();
       this.dismissed.set(this.store.input());
     }
   }

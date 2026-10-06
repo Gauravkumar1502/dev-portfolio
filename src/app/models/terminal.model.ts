@@ -14,6 +14,12 @@ export interface TermEntry {
   error?: string;
 }
 
+/** One Tab-completion option (fish-style: value plus a short description). */
+export interface CompletionItem {
+  value: string;
+  description?: string;
+}
+
 export interface ParsedCommand {
   name: string;
   args: string[];
@@ -43,7 +49,7 @@ export interface Command {
    */
   text?(args: string[], profile: Profile): string | string[];
   /** Tab-completion candidates for the argument being typed. */
-  complete?(args: string[], profile: Profile): string[];
+  complete?(args: string[], profile: Profile): (string | CompletionItem)[];
   /** Side effects only. Return a string to show it as an error/usage message. */
   run?(ctx: CommandContext): string | undefined | void;
 }

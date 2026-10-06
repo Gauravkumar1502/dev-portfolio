@@ -11,7 +11,13 @@ export const TERMINAL_COMMANDS: Command[] = [
     name: 'themes',
     description: 'check available themes',
     usage: THEMES_USAGE,
-    complete: (args) => (args.length <= 1 ? ['list', 'set'] : [...TERMINAL_THEMES]),
+    complete: (args) =>
+      args.length <= 1
+        ? [
+            { value: 'list', description: 'list all themes' },
+            { value: 'set', description: 'switch theme' },
+          ]
+        : [...TERMINAL_THEMES],
     run: ({ args, setTheme }) => {
       if (args.length === 0 || (args.length === 1 && args[0] === 'list')) return undefined;
       if (args[0] !== 'set' || args.length !== 2) return THEMES_USAGE;
@@ -24,7 +30,7 @@ export const TERMINAL_COMMANDS: Command[] = [
     name: 'history',
     description: 'view command history (-c to clear it)',
     usage: 'usage: history [-c]',
-    complete: (args) => (args.length <= 1 ? ['-c'] : []),
+    complete: (args) => (args.length <= 1 ? [{ value: '-c', description: 'clear history' }] : []),
     run: ({ args, clearHistory }) => {
       if (args.length === 0) return undefined;
       if (args.length === 1 && args[0] === '-c') {

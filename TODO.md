@@ -234,6 +234,11 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 - Faded rest-of-line after the cursor: newest matching history line, else a single unambiguous completion.
   Accept with → / End (cursor at end) or tap on mobile; Esc dismisses; hidden when the input overflows.
 
+### 5.9b fish-style Tab menu ✅ DONE
+
+- Several matches → grid of options with descriptions under the prompt; Tab / Shift+Tab cycle (previewed
+  in the prompt), Enter picks without running, Esc restores, typing closes. Ghost suggestion hidden while open.
+
 ### 5.10 Restore last terminal screen (optional, pending)
 
 - **Do:** persist `entries` (plain data, last ~50) and rebuild them on load — outputs re-render from data,

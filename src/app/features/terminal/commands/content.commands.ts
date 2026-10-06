@@ -21,7 +21,9 @@ export const CONTENT_COMMANDS: Command[] = [
     description: "view projects that I've coded",
     usage: PROJECTS_USAGE,
     complete: (args, profile) =>
-      args.length <= 1 ? ['go'] : profile.projects.map((_, i) => String(i + 1)),
+      args.length <= 1
+        ? [{ value: 'go', description: 'open a project' }]
+        : profile.projects.map((p, i) => ({ value: String(i + 1), description: p.name })),
     run: ({ args, profile, openUrl }) => {
       if (args.length === 0) return undefined;
       const index = Number(args[1]) - 1;
@@ -39,7 +41,10 @@ export const CONTENT_COMMANDS: Command[] = [
     name: 'socials',
     description: 'check out my social accounts',
     usage: SOCIALS_USAGE,
-    complete: (args, profile) => (args.length <= 1 ? ['go'] : profile.socials.map((s) => s.id)),
+    complete: (args, profile) =>
+      args.length <= 1
+        ? [{ value: 'go', description: 'open a profile' }]
+        : profile.socials.map((s) => ({ value: s.id, description: s.label })),
     run: ({ args, profile, openUrl }) => {
       if (args.length === 0) return undefined;
       const social =
@@ -65,7 +70,8 @@ export const CONTENT_COMMANDS: Command[] = [
     name: 'resume',
     description: 'view or download my resume',
     usage: RESUME_USAGE,
-    complete: (args) => (args.length <= 1 ? ['--download'] : []),
+    complete: (args) =>
+      args.length <= 1 ? [{ value: '--download', description: 'download the PDF' }] : [],
     run: ({ args, profile, openUrl, download }) => {
       if (args.length === 0) {
         openUrl(profile.resumeUrl);

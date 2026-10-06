@@ -73,7 +73,28 @@
 }
 
 .prompt__hints {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   gap: 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+.prompt__hint {
+  display: flex;
+  gap: var(--space-2);
+  padding-inline: var(--space-1);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.prompt__hint--active {
+  color: var(--term-bg);
+  background: var(--term-text);
+}
+
+.prompt__hint-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.75;
 }

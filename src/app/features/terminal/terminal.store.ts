@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { StorageService } from '../../core/services/storage.service';
 import { ProfileStore } from '../../core/state/profile.store';
 import { ThemeStore } from '../../core/state/theme.store';
-import { type CommandContext, type TermEntry } from '../../models/terminal.model';
+import {
+  type CommandContext,
+  type CompletionItem,
+  type TermEntry,
+} from '../../models/terminal.model';
 import { parseCommand } from './command-parser';
 import { findCommand, VISIBLE_COMMANDS } from './command-registry';
 
@@ -38,8 +42,13 @@ export class TerminalStore {
   readonly history = signal<string[]>(this.loadHistory());
   /** Current text in the prompt. */
   readonly input = signal('');
-  /** Completion candidates shown when Tab finds several matches. */
-  readonly hints = signal<string[]>([]);
+  /** fish-style completion menu shown when Tab finds several matches. */
+  readonly hints = signal<CompletionItem[]>([]);
+  /** Option highlighted by repeated Tab / Shift+Tab (-1 = none yet). */
+  readonly hintIndex = signal(-1);
+  /** Text before the word being completed, and the line as it was when the menu opened. */
+  private hintBase = '';
+  private hintOriginal = '';
   /** Position while browsing history with ↑/↓ (-1 = editing a fresh line). */
   private readonly pointer = signal(-1);
 
@@ -49,11 +58,12 @@ export class TerminalStore {
    */
   readonly suggestion = computed(() => {
     const value = this.input();
-    if (!value.trim()) return '';
+    // zsh-style: only while typing freely, not while the Tab menu is open
+    if (!value.trim() || this.hints().length) return '';
     const fromHistory = this.history().find((h) => h.length > value.length && h.startsWith(value));
     if (fromHistory) return fromHistory.slice(value.length);
     const { partial, matches } = this.completionsFor(value);
-    return matches.length === 1 ? (matches[0] ?? '').slice(partial.length) : '';
+    return matches.length === 1 ? (matches[0]?.value ?? '').slice(partial.length) : '';
   });
 
   constructor() {
@@ -63,7 +73,7 @@ export class TerminalStore {
   submit(raw = this.input()): void {
     const line = raw.trim();
     this.input.set('');
-    this.hints.set([]);
+    this.closeHints();
     this.pointer.set(-1);
     if (line && line !== this.history()[0]) {
       this.history.update((h) => [line, ...h].slice(0, MAX_HISTORY));
@@ -93,13 +103,13 @@ export class TerminalStore {
       { id: this.nextId++, input: `${this.input()}^C`, name: '', args: [] },
     ]);
     this.input.set('');
-    this.hints.set([]);
+    this.closeHints();
     this.pointer.set(-1);
   }
 
   clear(): void {
     this.entries.set([]);
-    this.hints.set([]);
+    this.closeHints();
   }
 
   /** ↑: step back through history into the prompt. */
@@ -119,18 +129,57 @@ export class TerminalStore {
     this.input.set(next === -1 ? '' : (this.history()[next] ?? ''));
   }
 
-  /** Tab: complete the command or the argument being typed; several matches → `hints`. */
-  complete(): void {
+  /**
+   * Tab (fish-style): one match → complete it; several → fill the common prefix and open the menu;
+   * Tab again / Shift+Tab (`reverse`) → cycle through the options, previewing each in the prompt.
+   */
+  complete(reverse = false): void {
+    const open = this.hints();
+    if (open.length) {
+      const last = open.length - 1;
+      const i = this.hintIndex();
+      const next = reverse ? (i <= 0 ? last : i - 1) : i >= last ? 0 : i + 1;
+      this.hintIndex.set(next);
+      this.input.set(this.hintBase + (open[next]?.value ?? ''));
+      return;
+    }
+
     const value = this.input();
     if (!value.trim()) return;
-
     const { partial, matches } = this.completionsFor(value);
     if (matches.length === 0) return;
-    const completion = matches.length === 1 ? `${matches[0]} ` : commonPrefix(matches);
-    this.hints.set(matches.length === 1 ? [] : matches);
-    if (completion.length > partial.length) {
-      this.input.set(value.slice(0, value.length - partial.length) + completion);
+
+    const base = value.slice(0, value.length - partial.length);
+    if (matches.length === 1) {
+      this.input.set(`${base}${matches[0]?.value} `);
+      return;
     }
+    const prefix = commonPrefix(matches.map((m) => m.value));
+    this.hintBase = base;
+    this.hintOriginal = base + (prefix.length > partial.length ? prefix : partial);
+    this.input.set(this.hintOriginal);
+    this.hints.set(matches);
+    this.hintIndex.set(-1);
+  }
+
+  /** Enter while an option is highlighted: take it (without running the command). */
+  acceptHint(): boolean {
+    const hint = this.hints()[this.hintIndex()];
+    if (!hint) return false;
+    this.input.set(`${this.hintBase}${hint.value} `);
+    this.closeHints();
+    return true;
+  }
+
+  /** Esc: close the menu and restore the text from before cycling. */
+  dismissHints(): void {
+    if (this.hintIndex() >= 0) this.input.set(this.hintOriginal);
+    this.closeHints();
+  }
+
+  closeHints(): void {
+    this.hints.set([]);
+    this.hintIndex.set(-1);
   }
 
   /** → / End / tap: take the inline suggestion. */
@@ -138,21 +187,24 @@ export class TerminalStore {
     const rest = this.suggestion();
     if (!rest) return false;
     this.input.update((value) => value + rest);
-    this.hints.set([]);
+    this.closeHints();
     return true;
   }
 
   /** Candidates for the word being typed (command name or argument). */
-  private completionsFor(value: string): { partial: string; matches: string[] } {
+  private completionsFor(value: string): { partial: string; matches: CompletionItem[] } {
     const endsWithSpace = /\s$/.test(value);
     const { name, args } = parseCommand(value);
     const typingName = args.length === 0 && !endsWithSpace;
     const partial = typingName ? name : endsWithSpace ? '' : (args.at(-1) ?? '');
 
-    const candidates = typingName
-      ? this.commands.map((c) => c.name)
-      : (findCommand(name)?.complete?.(endsWithSpace ? [...args, ''] : args, this.profile()) ?? []);
-    return { partial, matches: candidates.filter((c) => c.startsWith(partial.toLowerCase())) };
+    const candidates: CompletionItem[] = typingName
+      ? this.commands.map((c) => ({ value: c.name, description: c.description }))
+      : (
+          findCommand(name)?.complete?.(endsWithSpace ? [...args, ''] : args, this.profile()) ?? []
+        ).map((c) => (typeof c === 'string' ? { value: c } : c));
+    const lower = partial.toLowerCase();
+    return { partial, matches: candidates.filter((c) => c.value.startsWith(lower)) };
   }
 
   private loadHistory(): string[] {

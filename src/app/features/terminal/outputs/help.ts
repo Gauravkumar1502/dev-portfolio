@@ -28,7 +28,8 @@ import { TerminalStore } from '../terminal.store';
 export class HelpOutput {
   protected readonly commands = inject(TerminalStore).commands;
   protected readonly keys = [
-    { combo: 'Tab or Ctrl + i', action: 'autocomplete' },
+    { combo: 'Tab or Ctrl + i', action: 'autocomplete / open options' },
+    { combo: 'Tab / Shift + Tab', action: 'cycle options, Enter to pick, Esc to close' },
     { combo: 'Right / End', action: 'accept the faded suggestion' },
     { combo: 'Up / Down', action: 'browse command history' },
     { combo: 'Ctrl + l', action: 'clear the terminal' },
