@@ -9,10 +9,9 @@ export const PROFILE: Profile = {
   currentCompany: 'RedBlink Technologies',
   location: 'Mohali, India',
   about: [
-    'My coding adventure kicked off back in 2015 with NFS and Vice City. Racing virtual cars turned out to be my unexpected gateway into tech. In school I started playing with C and Java, building NetBeans desktop apps that probably confused more people than they helped.',
-    'In college I dove deep into programming, databases and web technologies, earning a BCA and then an MCA in Cloud Computing & DevOps, and learning how to turn complex problems into clean, working solutions.',
-    'Since then I’ve shipped CI/CD pipelines and Spring Boot APIs at Dortex AI, integrated restaurant POS systems with a digital-signage platform at Etasens, and today I build AI agents, RAG pipelines and MCP integrations at RedBlink Technologies.',
-    'When I’m not coding you’ll find me exploring new tech, watching sci-fi or playing video games. Always up for a chat about tech, so feel free to reach out!',
+    'Games like NFS and Vice City were my first real introduction to a computer. Playing them made me curious about how the machine actually works, so I picked up C and Java and chose computer science in school.',
+    'That curiosity carried me through a BCA and an MCA in Cloud Computing & DevOps, where I learned to turn problems into clean, working software.',
+    'Since then I’ve built CI/CD pipelines and Spring Boot APIs at Dortex AI, integrated restaurant POS systems at Etasens, and today I build AI agents, RAG pipelines and MCP integrations at RedBlink Technologies. Outside work: new tech, sci-fi and games. Always happy to chat!',
   ],
   aboutTech: [
     'Java',
