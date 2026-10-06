@@ -4,7 +4,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0 var(--space-2);
-  align-items: baseline;
+  align-items: center;
+
+  // one shared line box so label, input and ghost text sit on the same line
+  line-height: 1.6;
 }
 
 // Phones: prompt info on its own line, then `❯ input`.
@@ -25,7 +28,9 @@
 .prompt__field {
   display: grid;
   flex: 1;
+  align-items: center;
   min-width: 8rem;
+  height: calc(1.6 * 1em);
 
   > * {
     grid-area: 1 / 1;
@@ -36,8 +41,11 @@
   position: relative;
   width: 100%;
   min-width: 0;
+  height: 100%;
   padding: 0;
+  margin: 0;
   font: inherit;
+  line-height: inherit;
   color: inherit;
   caret-color: var(--term-accent);
   outline: none;
