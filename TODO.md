@@ -259,7 +259,7 @@ inline templates for small components, SCSS with `@use 'mixins' as nb;`, read co
 
 - **Do:** per-route title (already) + description via `Meta`; Open Graph tags; custom favicon (GK).
 
-### 6.2 Accessibility pass ✅ DONE (contrast via `pnpm check:contrast`; manual axe run still to do in a browser)
+### 6.2 Accessibility pass ✅ DONE (contrast script + Lighthouse: A11y 100, Perf 92, BP 100, SEO 100)
 
 - **Do:** check contrast for both GUI themes + all 17 terminal themes (adjust failing ones);
   focus rings everywhere; landmarks; run axe DevTools on `/` and `/terminal`.
