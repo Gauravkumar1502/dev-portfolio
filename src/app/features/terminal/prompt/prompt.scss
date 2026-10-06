@@ -75,7 +75,5 @@
 .prompt__hints {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1) var(--space-6);
-  margin-block-end: var(--space-1);
-  color: var(--term-accent);
+  gap: 0 var(--space-4);
 }

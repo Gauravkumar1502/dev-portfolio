@@ -14,13 +14,6 @@ import { TermInfo } from './term-info';
   selector: 'app-prompt',
   imports: [TermInfo],
   template: `
-    @if (store.hints().length) {
-      <p class="prompt__hints" aria-live="polite">
-        @for (hint of store.hints(); track hint) {
-          <span>{{ hint }}</span>
-        }
-      </p>
-    }
     <form class="prompt" (submit)="$event.preventDefault(); store.submit()">
       <label class="prompt__label" for="terminal-input">
         <app-term-info />
@@ -48,6 +41,14 @@ import { TermInfo } from './term-info';
         />
       </div>
     </form>
+    <!-- Tab with several matches: options listed under the line being typed -->
+    @if (store.hints().length) {
+      <p class="prompt__hints" aria-live="polite" aria-label="Completions">
+        @for (hint of store.hints(); track hint) {
+          <span>{{ hint }}</span>
+        }
+      </p>
+    }
   `,
   styleUrl: './prompt.scss',
 })
@@ -78,6 +79,8 @@ export class Prompt {
 
   protected onInput(field: HTMLInputElement): void {
     this.store.input.set(field.value);
+    // options belong to the previous text; typing hides them like a real shell
+    this.store.hints.set([]);
   }
 
   /** Mobile keyboards have no →, so tapping the faded text accepts it (keeps focus in the input). */
